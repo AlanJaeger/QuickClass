@@ -1,0 +1,507 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Quick Class</title>
+    <link rel="icon" type="image/icon" href="{% static "img/simboloQuick.png" %}">
+
+    <!--CSS do Bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!--CSS do Slick-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick-theme.css">
+
+    <!--CSS Quick Class-->
+    <link rel="stylesheet" type="text/css" href="{% static "css/estilo.css" %}">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    
+</head>
+
+<body>
+    <div class="container-fluid header">
+        <div class="row">
+            <div class="col-md-6">
+                <a class="logo" href="/">
+                    <img class="img-responsive img-logo" src="{% static "img/logo-quick.png" %}">
+                </a>
+            </div>
+
+            <!-- {% if user.is_authenticated %}
+            <div class="col-md-2">
+                <p>Olá {{ user }}</p> 
+            </div>
+            {% endif %} -->
+
+            {% if user.is_authenticated %}
+            <div class="col-md-2" style=" max-width:159px; margin-left:115px;">
+                 <a class="signin-button text-signin" style="text-decoration:none;" href=/logout/>Sair</a> 
+            </div>
+            {% else %}
+            <div class="col-md-2" style=" max-width:156px; margin-left:115px;">
+                <a class="signin-button text-signin" style="text-decoration:none;" href=/login/>Iniciar Sessão</a> 
+           </div>
+           {% endif %}
+           {% if not user.is_authenticated %}
+            <div class="col-md-2" style=" max-width:144px;">
+                <a class="signin-button text-signin" style="text-decoration:none;" href=/cadastro/>Registrar-se</a> 
+           </div>
+           {% endif %}
+           <div class="col-md-2">
+                <a class="signin-button text-signin" style="text-decoration:none;" href=/professor/>Torne-se um professor</a> 
+           </div>
+        </div>
+        <div class="row">
+            <div class="col text-space pitch">
+                <h1 class="pitch_title">Os melhores professores do RN <br> em um só lugar <br>
+                </h1>
+                <p class="pitch_subtitle">QUICK CLASS O SEU PORTAL DE AULAS ONLINE</p>
+                <a href="{% url 'aluno' %} " class="btn-edit text-edit">Acesse o nosso catalogo</a>
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class ="subtitulo" style="margin-left:291px;">
+                            Conheça o nosso time de professores
+                        </p>
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="inscrever" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content col-md-11 col-md-offset-0 text-center">
+                    <div class="modal-header" style="border-bottom: 0px; margin-top: 20px">
+                        <h2 class="modal-title" id="inscrever" style="
+                        margin-left: 106px; font-family:Roboto; font-weight:600">
+                        iniciar sessão</h2>
+                        <button type="button" class="close" style="margin-top: -106px; margin-right: -13px" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                              <label for="exampleInputEmail1" style="float:left">Email</label>
+                              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite seu email">
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputPassword1" style="float:left">Senha</label>
+                              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Digite sua senha">
+                            </div>
+                            <button type="submit" class="signin-button text-signin" style="font-size:17px;">Entrar</button>
+                          </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="cadastro" tabindex="-1" role="dialog" aria-labelledby="inscrever" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content col-md-11 col-md-offset-0 text-center">
+                    <div class="modal-header" style="border-bottom: 0px; margin-top: 20px">
+                        <h2 class="modal-title" id="inscrever" style="
+                        margin-left: 78px; font-family:Roboto; font-weight:600">
+                        Faça seu cadastro</h2>
+                        <button type="button" class="close" style="margin-top: -106px; margin-right: -13px" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                              <label for="exampleInputEmail1" style="float:left">Username</label>
+                              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite seu nome de usuario">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1" style="float:left">Email</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite seu email">
+                              </div>
+                            <div class="form-group">
+                              <label for="exampleInputPassword1" style="float:left">Senha</label>
+                              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Digite sua senha">
+                            </div>
+                            <button type="submit" class="signin-button text-signin" style="font-size:17px;">Cadastrar</button>
+                          </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="ExemploModalCentralizado" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="TituloModalCentralizado">Ainda não</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                            <h2>
+                                Cadastre-se e efetue o login para aproveitar todas as aulas!
+                            </h2>
+                                 
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+    <section class="center slider" >
+        <div class="carousel">
+                
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{% static "img/CarlosMoura.jpg"%}" alt="Card image cap" style="height:100%">
+                <div class="card-body">
+                    <h5 class="card-title" style="color:black">Carlos Moura</h5>
+                    <p class="card-text" style="color:black">Biólogo, mestre em genética e Biologia Molecular, gestor acadêmico, coach, analista comportamental e palestrante.</p>
+                    <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#ExemploModalCentralizado">
+                            Comprar
+                          </button>
+                </div>
+            </div>
+
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{% static "img/cards_completos/card_azul/cap.png"%}" alt="Card image cap" style="height:100%">
+                <div class="card-body">
+                    <h5 class="card-title" style="color:black">Estevan Roger</h5>
+                    <p class="card-text" style="color:black">Formado em psicologia com foco em relacionamentos pessoais. Instrutor universitario e coach motivacional. </p>
+                    <a href="#" class="btn btn-block btn-outline-danger">Comprar</a>
+                </div>
+            </div>
+
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{% static "img/cards_completos/card_roxo/nat.png"%}" alt="Card image cap" style="height:100%">
+                <div class="card-body">
+                    <h5 class="card-title" style="color:black">Natalia Roma</h5>
+                    <p class="card-text" style="color:black">Formada em psicologia com foco em relacionamentos pessoais. Instrutor universitario e coach motivacional.</p>
+                    <a href="#" class="btn btn-block btn-outline-danger">Comprar</a>
+                </div>
+            </div>
+
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{% static "img/RodrigoCorreia.jpg"%}" alt="Card image cap" style="height:100%">
+                <div class="card-body">
+                    <h5 class="card-title" style="color:black">Rodrigo Correia</h5>
+                    <p class="card-text" style="color:black">Formado em psicologia com foco em relacionamentos pessoais. Instrutor universitario e coach motivacional.</p>
+                    <a href="#" class="btn btn-block btn-outline-danger">Comprar</a>
+                </div>
+            </div>
+
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{% static "img/ErikaScherma.jpg"%}" alt="Card image cap" style="height:100%">
+                <div class="card-body">
+                    <h5 class="card-title" style="color:black">Erika Scherman</h5>
+                    <p class="card-text" style="color:black">Formada em psicologia com foco em relacionamentos pessoais. Instrutor universitario e coach motivacional.</p>
+                    <a href="#" class="btn btn-block btn-outline-danger">Comprar</a>
+                </div>
+            </div>
+
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{% static "img/cards_completos/card_preto/tchala.png"%}" alt="Card image cap" style="height:100%">
+                <div class="card-body">
+                    <h5 class="card-title" style="color:black">Thiago Tavares</h5>
+                    <p class="card-text" style="color:black">Formado em psicologia com foco em relacionamentos pessoais. Instrutor universitario e coach motivacional.</p>
+                    <a href="#" class="btn btn-block btn-outline-danger">Comprar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="features">
+        
+        <nav>
+            <div class="center columns size-80">
+                <a class="column is-selected" href="#" data-id="cancelanytime">
+                    <img alt="Cancel anytime" src="{% static "img/people.svg" %}"/>
+                    <h2>
+                        Nossos Valores
+                    </h2>
+                    
+                </a>
+
+                <a class="column" href="#" data-id="watchanywhere">
+                    <img alt="Watch anywhere" src="{% static "img/customer.svg" %}" />
+                    <h2>
+                        Conheça outros serviços
+                    </h2>
+                </a>
+
+                
+            </div>
+        </nav>
+
+        <article style="background-color: rgba(40, 46, 52, 0.6)">
+            <section class="is-selected center size-70" data-id="cancelanytime">
+                <div class="columns">
+                <div class="container-img">      
+                    <div class="section section-our-clients-freebie"> 
+                        <ul class="nav nav-text" role="tablist">
+                            <li class="active">
+                                <a href="#testimonial1" role="tab" data-toggle="tab">
+                                 <div class="image-clients zoom" >
+                                     <img alt="..." src="{%static 'img/missao.svg'%}" />
+                                </div>
+                                </a>
+                            </li>
+                    
+                             <li>
+                                 <a href="#testimonial2" role="tab" data-toggle="tab">
+                                <div class="image-clients zoom">
+                                    <img alt="..."  src="{%static 'img/VISAO.svg'%}" />
+                                </div>
+                                </a>
+                             </li>
+
+                              <li>
+                                  <a href="#testimonial3" role="tab" data-toggle="tab">
+                                 <div class="image-clients zoom">
+                                     <img alt="..."  src="{%static 'img/diamond.svg'%}" />
+                                </div>
+                                </a>
+                            </li>
+                     </ul>
+                     <div class="tab-content">
+                        <div class="tab-pane active" id="testimonial1">
+                            <h1 class="titulo-fonte">
+                                MISSÃO
+                            </h1>
+                            <p class="description">
+                                Ajudar pessoas a conquistarem seus sonhos  e auxiliar na transformação de vidas.
+                            </p>
+                        </div>
+
+                        <div class="tab-pane"  id="testimonial2">
+                            <h1>
+                                VISÃO
+                            </h1>
+                                <p class="description">
+                                    Sermos reconhecidos como a melhor plataforma do Brasil para aulas online.                                    
+                                </p>
+                            </div>
+
+                            <div class="tab-pane" id="testimonial3">
+                                <h1>
+                                    VALORES
+                                </h1>
+                                    <p class="description">
+                                            Respeito aos nossos clientes. Transparência nas relações. Comportamento ético. Compromisso com a aprendizagem dos nossos estudantes.                                            
+                                    </p>
+                                </div>
+                        
+                     </div>
+             </div>
+         </div> 
+        </div>
+            </section>
+
+            
+
+            <section class="center size-80" id="watchanywhere" data-id="watchanywhere">
+                <div class="columns size-90 center">
+                    <div class="column text-center">
+                       <div class="row">
+                <div class="col-md-3" style="max-width: 20%;">
+                    <div class="info-icon">
+                        <div class="icon zoom" style="color:white; font-size:55px">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <p class="description">Aulas Particulares Online</p>
+                    </div>
+                </div>
+                <div class="col-md-3" style="max-width: 20%;">
+                    <div class="info-icon">
+                        <div class="icon zoom" style="color: white; font-size: 55px">
+                                <i class="fas fa-th-large"></i>
+                        </div>
+                        <p class="description">Módulos de conteúdos</p>
+                    </div>
+                </div>
+                <div class="col-md-3" style="max-width: 20%;">
+                    <div class="info-icon">
+                        <div class="icon zoom" style="color: white; font-size: 50px">
+                                <i class="fas fa-book"></i>
+                        </div>
+                        <p class="description" style="margin-left:-15px;">Cursos isolados por matéria</p>
+                    </div> 
+                </div>
+
+                <div class="col-md-3" style="max-width: 20%;">
+                    <div class="info-icon">
+                        <div class="icon zoom" style="color: white; font-size: 55px">
+                                <i class="fas fa-brain"></i>
+                        </div>
+                        <p class="description">Cursos por área de conhecimento</p>
+                    </div>
+                </div>
+
+                <div class="col-md-3" style="max-width: 20%;">
+                        <div class="info-icon">
+                            <div class="icon zoom" style="color: white; font-size: 55px">
+                                    <i class="fas fa-hand-holding-heart"></i>
+                            </div>
+                            <p class="description">Acompanhamento Pedagógico</p>
+                        </div>
+                    </div>
+            </div>
+                    </div>
+                </div>
+            </section>
+
+           
+        </article>
+    </div>
+
+    
+
+
+    <!--Footer-->
+    <footer class="page-footer font-medium unique-color-dark pt-0" style="max-width: 100%;background-color: #1e1e1e;">
+
+        <div>
+            <div class="container">
+                <!--Grid row-->
+                <div class="row py-4 d-flex align-items-center" style="margin-bottom: -32px">
+
+                    <!--Grid column-->
+                    <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                        <h5 class="mb-0">Nós também estamos nas redes sociais!</h5>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-md-6 col-lg-7 text-center text-md-right">
+                        <!--Facebook-->
+                        <a class="edit-text" style="text-decoration: none;" href="https://www.facebook.com/agilsistemas.net/">
+                            <i class="fab fa-facebook-f mr-lg-4"></i>
+                        </a>
+                        <!--Linkedin-->
+                        <a class="edit-text" style="text-decoration: none;" href="https://www.linkedin.com/company/agilsistemasweb/">
+                            <i class="fab fa-linkedin-in mr-lg-4"></i>
+                        </a>
+                        <!--Instagram-->
+                        <a class="edit-text" style="text-decoration: none;" href="https://www.instagram.com/agil_sistemas/">
+                            <i class="fab fa-instagram mr-lg-4"></i>
+                        </a>
+                    </div>
+                    <!--Grid column-->
+
+                </div>
+                <!--Grid row-->
+            </div>
+        </div>
+
+        <!--Footer Links-->
+        <div class="container mt-5 mb-4 text-center text-md-left">
+            <div class="row mt-3">
+
+                <!--First column-->
+                <div class="col-md-3 col-lg-4 col-xl-3 mb-4">
+                    <h6 class="text-uppercase font-weight-bold" style="margin-bottom:22px;">
+                         <strong>Quick Class</strong> 
+                    </h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width:60px; color:white;">
+                    <p style="margin-top:-39px">Aprenda aonde e quando quiser!</p>
+                </div>
+                <!--/.First column-->
+
+                <!--Second column-->
+                <!-- <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <h6 class="text-uppercase font-weight-bold">
+                        <strong>Produtos</strong>
+                    </h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        <img class="img-responsive img-logo2" src="{% static "img/saga-logo.png" %}">
+                    </p>
+                    <p>
+                        <img class="img-responsive img-logo2" src="{% static "img/Ativo 9-8.png" %}">
+                    </p>
+                    <p>
+                        <img class="img-responsive img-logo2" src="{% static "img/exodo.png" %}">
+                    </p>
+                </div> -->
+                <!--/.Second column-->
+
+                <!--Third column-->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <h6 class="text-uppercase font-weight-bold">
+                        <strong>Links Úteis</strong>
+                    </h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto edit-text" style="width: 60px;">
+                    <p>
+                        <a class="edit-text" style="text-decoration: none;" href="/equipe">Quem Somos</a>
+                    </p>
+                    <p>
+                            <a class="edit-text" style="text-decoration: none;" href="#!">Ajuda</a>
+                        </p>
+                    <p>
+                        <!-- <a class="edit-text" style="text-decoration: none;" href="/professor">Trabalhe Conosco</a> -->
+                    </p>
+                    
+                </div>
+                <!--/.Third column-->
+
+                <!--Fourth column-->
+                <div class="col-md-4 col-lg-3 col-xl-3">
+                    <h6 class="text-uppercase font-weight-bold">
+                        <strong>Contato</strong>
+                    </h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        <i class="fa fa-home mr-3"></i> contato@quickclass.net.br</p>
+                    <p>
+                        <i class="fa fa-envelope mr-3"></i><a class="edit-text" style="text-decoration: none;" href="mailto:suporte@quickclass.net.br">suporte@quickclass.net.br</a></p>
+                    <p>
+                        <!-- <i class="fa fa-phone mr-3"></i>(84) 2226-8230</p> -->
+                </div>
+                <!--/.Fourth column-->
+
+            </div>
+        </div>
+        <!--/.Footer Links-->
+
+        <!-- Copyright-->
+        <div class="footer-copyright py-3 text-center" style="margin-top: -50px">
+            © 2018 Copyright:
+            <a class="edit-text" style="text-decoration: none;" href="https://mdbootstrap.com/material-design-for-bootstrap/">
+                <strong> agilsistemas.net.br</strong>
+            </a>
+        </div>
+        <!--/.Copyright -->
+
+    </footer>
+    <!--/.Footer-->
+
+</body>
+
+</html>
+
+<!--JS e JQ do Bootstrap-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+<!--JS Slick-->
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick.js"></script>
+
+<!--JS do Quick-->
+<script type="text/javascript" src="{% static "js/quick.js" %}"></script>
