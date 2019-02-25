@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import datetime
 from django.views import View
-from index.models import ProfessoresInteressados, Professor, Disciplina
+from index.models import ProfessoresInteressados, Professor, Disciplina, Aulas
 from .forms import InteresseForm, ProfessorForm, PedidoForm, AulaForm, UserForm
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
@@ -49,7 +49,8 @@ class DashboardAluno(View):
     def get(self, request): 
         disciplinas = Disciplina.objects.all()
         professores = ProfessoresInteressados.objects.filter(aprovacao = True)
-        return render(request, 'index/aluno.html',{'professores':professores, 'disciplinas':disciplinas})
+        aulas = Aulas.objects.all()
+        return render(request, 'index/aluno.html',{'professores':professores, 'disciplinas':disciplinas, 'aulas':aulas})
 
 class AprovarEntrada(View):
     def post(self, request,id_candidato):        
@@ -120,11 +121,6 @@ class CatalogoProfessor(View):
         return render(request, 'index/catalogoProfessor.html')
 
 class CadastroAula(View):
-    def get(self, request):
-        form = AulaForm()
-        return render(request,'index/cadastroAula.html',{'form': form})
-
-
     def post(self, request):
         form = AulaForm(request.POST, request.FILES)
         if form.is_valid():

@@ -9,6 +9,8 @@ idna==2.7
 mercurial==3.7.3
 mysql-connector-python==2.0.4
 mysql-utilities==1.6.1
+numpy==1.15.2
+opencv-python==3.4.3.18
 paramiko==1.16.0
 pexpect==4.0.1
 ply==3.7
@@ -25,4 +27,4 @@ six==1.10.0
 sqlparse==0.1.18
 unity-lens-photos==1.0
 urllib3==1.23
-virtualenv==15.1.0
+virtualenv==16.0.0

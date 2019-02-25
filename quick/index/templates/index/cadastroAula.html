@@ -1,174 +1,240 @@
-{% load staticfiles %}
+{% extends 'index/painel.html' %}
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset='utf-8' />
-<link href="{% static "js/fullcalendar/fullcalendar.min.css"%}" rel='stylesheet' />
-<link href="{% static "js/fullcalendar/fullcalendar.print.css"%}" rel='stylesheet' media='print' />
-<script src="{% static "js/fullcalendar/lib/moment.min.js"%}"></script>
-<script src="{% static "js/fullcalendar/lib/jquery.min.js"%}"></script>
-<script src="{% static "js/fullcalendar/fullcalendar.min.js"%}"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-<title>Perfil do Professor</title>
-<link rel="icon" type="image/icon" href="Img/LogoSimb.png">
-
-<!--CSS do Bootstrap-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<!--CSS Quick Class-->
-<link rel="stylesheet" type="text/css" href="{% static 'css/perfil.css' %}">
-
-<!--Fonts CSS-->
-<link href="https://fonts.googleapis.com/css?family=Yantramanav:700" rel="stylesheet">
+<!-- Bloco que está contido em 'base.html' -->
+{% block pageTitle %}
+<p class="panel-title">
+  Cadastrar Aula
+</p>
+{% endblock %} {% load static %}
 <script>
-$(document).ready(function() {
-
-        $('#calendar').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
-            },
-            defaultDate: '2018-12-18',
-            navLinks: true, // can click day/week names to navigate views
-            selectable: true,
-            selectHelper: true,
-            select: function(start, end) {
-                // Display the modal.
-                // You could fill in the start and end fields based on the parameters
-                $('.modal').modal('show');
-
-            },
-            eventClick: function(event, element) {
-                // Display the modal and set the values to the event values.
-                $('.modal').modal('show');
-            },
-            editable: true,
-            eventLimit: true // allow "more" link when too many events
-
-        });
-
-        // Bind the dates to datetimepicker.
-        // You should pass the options you need
-        $("#starts-at, #ends-at").datetimepicker();
-
-        // Whenever the user clicks on the "save" button om the dialog
-        $('#save-event').on('click', function() {
-            var title = $('#title').val();
-            if (title) {
-                var eventData = {
-                    title: title,
-                    start: $('#starts-at').val(),
-                    end: $('#ends-at').val()
-                };
-                $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-            }
-            $('#calendar').fullCalendar('unselect');
-
-            // Clear modal inputs
-            $('.modal').find('input').val('');
-
-            // hide modal
-            $('.modal').modal('hide');
-        });
-    });
-
 
 </script>
+<!-- Incluindo breadcrumb -->
+{% block content %}
 <style>
-
-  body {
-    margin: 40px 10px;
-    padding: 0;
-    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-    font-size: 14px;
-    margin-top: 100px;
-  }
-
-  #calendar {
-    max-width: 900px;
-    margin: 0 auto;
+  .input {
+    width: 100%;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    font-size: 15px;
+    height: 2.25em;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    line-height: 1.5;
+    padding-bottom: calc(0.375em - 1px);
+    padding-left: calc(0.625em - 1px);
+    padding-right: calc(0.625em - 1px);
+    padding-top: calc(0.375em - 1px);
+    position: relative;
+    vertical-align: top;
     background-color: white;
+    border-color: #dbdbdb;
+    color: #363636;
+    -webkit-box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
+    box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
+    max-width: 100%;
   }
 
+  .labelnome {
+    color: #363636;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 0;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
 
+  .button {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 1px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    font-size: 14px;
+    height: 2.25em;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    line-height: 1.5;
+    padding-bottom: calc(0.375em - 1px);
+    padding-left: calc(0.625em - 1px);
+    padding-right: calc(0.625em - 1px);
+    padding-top: calc(0.375em - 1px);
+    position: relative;
+    vertical-align: top;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: white;
+    border-color: #dbdbdb;
+    color: #363636;
+    cursor: pointer;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    text-align: center;
+    white-space: nowrap;
+  }
 </style>
-</head>
-<body>
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-fixed-top">
-                <div class="container">
-                    <a href="/">
-                        <img class="img-fluid logo" src="{% static 'img/logo-quick.png' %}">
-                    </a>  
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                          <span class="navbar-toggler-icon"></span>
-                    </button>           
-                </div>
-            </nav>
-
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <div class="panel-body">
-                <div id='calendar'></div>
-                <form class="mt-5 mr-5" action='{%url "cadastrar_aula"%}' enctype="multipart/form-data" method="POST">
-                    
-                {% csrf_token %}
-                <div class="modal fade" tabindex="-1" role="dialog">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">Create new event</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                        <div class="form-group col-md-6">
-                                                <label for="inputEmail4" class="form-text">Nome</label>
-                                                {{form.titulo}}
-                                                </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <label class="col-xs-4" for="starts-at">Starts at</label>
-                                        <input type="text" name="starts_at" id="starts-at" />
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <label class="col-xs-4" for="ends-at">Ends at</label>
-                                        <input type="text" name="ends_at" id="ends-at" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <input type="submit" class="btn btn-default">Cadastrar</button>
-                                
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
-
-                {%for aula in Aulas %}
-                <td class="fc-event-container">
-                        <a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable fc-resizable">
-                            <div class="fc-content"> 
-                                <span class="fc-title">{{aula.titulo}}</span>
-                            </div>
-                            <div class="fc-resizer fc-end-resizer">
-                            </div>
-                        </a>
-                    </td>
-                {%endfor%}
-                
+<!-- CADASTRO FORM -->
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <form method="POST" action=>
+      {% csrf_token %}
+      <div class="field">
+        <div class="field">
+          <label class="labelnome">Data da aula</label>
+          <div class="control">
+            {{form.dia}}
+          </div>
         </div>
-    </div>
-</div>
-  
+        <div class="field">
+          <label class="labelnome">Horario</label>
+          <div class="control">
+            {{form.horario}}
+          </div>
+        </div>
+        <div class="field">
+          <label class="labelnome">Duração</label>
+          <div class="control">
+            <div class="select">
+              {{form.duracao}}
+            </div>
+          </div>
+        </div>
 
-</body>
-</html>
+        <label class="labelnome">Disciplina</label>
+        <div class="row">
+          <div class="col-md-9">
+            <div class="">
+              {{form.disciplina}}
+            </div>
+          </div>
+        </div>
+
+        <label class="labelnome">Conteudo</label>
+        <div class ="row">
+          <div class="col-md-9">
+              {{form.conteudo}}               
+          </div>
+        </div>
+     
+        <div class="field is-grouped">
+          <p class="control" style="
+          margin-top: 10px;">
+            <button class="btn btn-primary" type="submit">
+              Salvar
+            </button>
+          </p>
+        </div>
+    </form>
+    </div>
+  </div>
+
+  <div class="modal-background"></div>
+
+  <div id="modalCoordenador" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-title">Cadastar Coordenador</h4>
+        </div>
+        {% csrf_token %}
+        <div class="modal-body">
+          <label class="labelnome" for="nome">Pessoas</label>
+          <div class="content control">
+            <div class="">
+              <select name="coordenadores" class="input" tabindex="-1" id="coordenadores" aria-hidden="true">
+                  <option value="" selected="" data-select2-id="2">---------</option>
+                  {% for pessoa in pessoas_nao_coordenadoras %}
+                    <option value="{{ pessoa.pessoa__id }}"> {{ pessoa.pessoa__nome }} </option>             
+                  {% endfor %}
+                </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" id="submitCoordenador" data-dismiss="modal">salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modalUnidade" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-title">Cadastar unidade</h4>
+        </div>
+        {% csrf_token %}
+        <div class="modal-body">
+          <label class="labelnome" for="nome">Nome</label>
+          <div class="content control">
+            {{ unidade_form.nome }}
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" id="submitUnidade" data-dismiss="modal">salvar</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  {% endblock %} {% block scripts %} {% load static %}
+  <script src="{% static 'js/cadastros.js' %}"></script>
+  <script>
+    // In your Javascript (external .js resource or <script> tag)
+    $(document).ready(function () {
+      $('#id_coordenador').select2();
+      $('#id_unidade').select2();
+    });
+
+    $('#submitUnidade').click(function () {
+      let url = '/unidades/cadastro/';
+      let nome = $('.modal-body #id_nome').val();
+      let data = { 'nome': nome };
+
+      cadastrar(url, data, '#id_unidade');
+    });
+
+    $('#submitCoordenador').click(function () {
+      let id = $('#coordenadores').val();
+      let url = '/coordenadores/' + id + '/cadastro/';
+
+      cadastrar(url, id, '#id_coordenador');
+    });
+  </script> 
+  
+  {% endblock %}
+  

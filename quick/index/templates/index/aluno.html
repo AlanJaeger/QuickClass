@@ -1,4 +1,8 @@
 {% load staticfiles %}
+{% load user_tags %}
+
+
+{% if request.user|has_group:"Aluno" %}
 
 <head>
     <meta charset="UTF-8">
@@ -82,32 +86,22 @@
                               <tr>
                                 <th scope="col">Dia</th>
                                 <th scope="col">Hórario</th>
-                                <th scope="col">Last</th>
+                                <th scope="col">Duração</th>
                                 <th scope="col">Comprar</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
-                                <th scope="row">10/09</th>
-                                <td>10h ~ 12h</td>
-                                <td>Otto</td>
+                                    
+                               {% for aula in aulas %}
+                                <th scope="row">{{aula.dia}}</th>
+                                <td></td>
+                                <td></td>
                                 <td><button type="button" class="btn btn-success">Compra rápida</button>
                                     <i class="fas fa-plus-square  fa-lg" title="Adicionar ao carrinho"></i>
                                 </td>
-                              </tr>
-                              <tr>
-                                <th scope="row">21/11</th>
-                                <td>15h ~ 17h</td>
-                                <td>Thornton</td>
-                                <td><button type="button" class="btn btn-success">Compra rápida</button>
-                                    <i class="fas fa-plus-square fa-lg" title="Adicionar ao carrinho"></i>
-                                </tr>
-                              <tr>
-                                <th scope="row">30/12</th>
-                                <td>18h ~ 20h</td>
-                                <td>the Bird</td>
-                                <td><button type="button" class="btn btn-success">Compra rápida</button>
-                                    <i class="fas fa-plus-square fa-lg" title="Adicionar ao carrinho"></i>                                
+                                {% endfor %}
+            
                               </tr>
                             </tbody>
                           </table>
@@ -154,6 +148,790 @@
         </div>
 
     </header>
+    {% endif %} 
+
+
+    {% if request.user|has_group:"Professor" %}
+    <!DOCTYPE html>
+    <html>
+        <head>
+            {% load static %}
+            <title>SAGA | Sistema Ágil em Gestão de Aprendizagem</title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <link rel="icon" href="{% static 'favicon.ico' %}">
+            <!-- Latest compiled and minified CSS -->
+           
+            <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>          
+            <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" integrity="sha384-DmABxgPhJN5jlTwituIyzIUk6oqyzf3+XuP7q3VfcWA2unxgim7OSSZKKf0KSsnh" crossorigin="anonymous">
+            <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+            <link href="/static/owl.carousel/dist/assets/owl.carousel.css" rel="stylesheet">
+            <link href="/static/owl.carousel/dist/assets/owl.theme.default.css" rel="stylesheet">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+            <script src="{% static 'moment/moment.js' %}"></script> 
+            <link href="{% static 'css/jquery.datetimepicker.css' %}" rel="stylesheet">            
+            <script src="{% static 'js/jquery.datetimepicker.full.js' %}"></script>
+            
+            
+            
+            
+           
+           
+            <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.2/Chart.min.js"></script>         
+            <!-- Máscaras -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+            
+            
+
+
+            <!-- Select 2 -->
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+            
+            <!-- Latest compiled and minified JavaScript -->
+            <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
+            <!-- Arquivos css, js e imagens devem sem importados com a tag abaixo -->
+            <!-- <link href="{% static 'bulma/css/bulma.css' %}" rel="stylesheet"> -->
+            <link href="{% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+            <!-- <link href="{% static 'js/@fengyuanchen/datepicker/dist/datepicker.min.css' %}" rel="stylesheet"> -->
+             <link href="{% static 'js/jquery-datetimepicker/build/jquery.datetimepicker.min.css' %}" rel="stylesheet">
+            <!-- <link href="{% static 'css/style.css' %}" rel="stylesheet"> -->
+            <!-- <link href="{% static 'css/list_template.css' %}" rel="stylesheet"> -->
+            {% block head %}
+            {% endblock %}
+            <style>
+                /*!
+ * bootstrap-notifications v1.0.3 (https://skywalkapps.github.io/bootstrap-notifications)
+ * Copyright 2017 Martin Staněk
+ * Licensed under MIT
+ */
+.dropdown-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 200px;
+  max-width: 330px;
+  margin: 2px 0 0;
+  list-style: none;
+  font-size: 14px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  background-clip: padding-box;
+}
+.dropdown-container > .dropdown-menu {
+  position: static;
+  z-index: 1000;
+  float: none!important;
+  padding: 10px 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  max-height: 330px;
+  overflow-y: auto;
+}
+.dropdown-container > .dropdown-menu + .dropdown-menu {
+  padding-top: 0;
+}
+.dropdown-menu > li > a {
+  overflow: hidden;
+  white-space: nowrap;
+  word-wrap: normal;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  -webkit-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.dropdown-toggle {
+  cursor: pointer;
+}
+.dropdown-header {
+  white-space: nowrap;
+}
+.open > .dropdown-container > .dropdown-menu,
+.open > .dropdown-container {
+  display: block;
+}
+.dropdown-toolbar {
+  padding-top: 6px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 5px;
+  background-color: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px 4px 0 0;
+}
+.dropdown-toolbar > .form-group {
+  margin: 5px -10px;
+}
+.dropdown-toolbar .dropdown-toolbar-actions {
+  float: right;
+}
+.dropdown-toolbar .dropdown-toolbar-title {
+  margin: 0;
+  font-size: 14px;
+}
+.dropdown-footer {
+  padding: 5px 20px;
+  border-top: 1px solid #ccc;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0 0 4px 4px;
+}
+.anchor-block small {
+  display: none;
+}
+@media (min-width: 992px) {
+  .anchor-block small {
+    display: block;
+    font-weight: normal;
+    color: #777777;
+  }
+  .dropdown-menu > li > a.anchor-block {
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+}
+@media (min-width: 992px) {
+  .dropdown.hoverable:hover > ul {
+    display: block;
+  }
+}
+.dropdown-position-topright {
+  top: auto;
+  right: 0;
+  bottom: 100%;
+  left: auto;
+  margin-bottom: 2px;
+}
+.dropdown-position-topleft {
+  top: auto;
+  right: auto;
+  bottom: 100%;
+  left: 0;
+  margin-bottom: 2px;
+}
+.dropdown-position-bottomright {
+  right: 0;
+  left: auto;
+}
+.dropmenu-item-label {
+  white-space: nowrap;
+}
+.dropmenu-item-content {
+  position: absolute;
+  text-align: right;
+  max-width: 60px;
+  right: 20px;
+  color: #777777;
+  overflow: hidden;
+  white-space: nowrap;
+  word-wrap: normal;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+small.dropmenu-item-content {
+  line-height: 20px;
+}
+.dropdown-menu > li > a.dropmenu-item {
+  position: relative;
+  padding-right: 66px;
+}
+.dropdown-submenu .dropmenu-item-content {
+  right: 40px;
+}
+.dropdown-menu > li.dropdown-submenu > a.dropmenu-item {
+  padding-right: 86px;
+}
+.dropdown-inverse .dropdown-menu {
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.9);
+}
+.dropdown-inverse .dropdown-menu .divider {
+  height: 1px;
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #2b2b2b;
+}
+.dropdown-inverse .dropdown-menu > li > a {
+  color: #cccccc;
+}
+.dropdown-inverse .dropdown-menu > li > a:hover,
+.dropdown-inverse .dropdown-menu > li > a:focus {
+  color: #fff;
+  background-color: #262626;
+}
+.dropdown-inverse .dropdown-menu > .active > a,
+.dropdown-inverse .dropdown-menu > .active > a:hover,
+.dropdown-inverse .dropdown-menu > .active > a:focus {
+  color: #fff;
+  background-color: #337ab7;
+}
+.dropdown-inverse .dropdown-menu > .disabled > a,
+.dropdown-inverse .dropdown-menu > .disabled > a:hover,
+.dropdown-inverse .dropdown-menu > .disabled > a:focus {
+  color: #777777;
+}
+.dropdown-inverse .dropdown-header {
+  color: #777777;
+}
+.table > thead > tr > th.col-actions {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.table > thead > tr > th.col-actions .dropdown-toggle {
+  color: #777777;
+}
+.notifications {
+  list-style: none;
+  padding: 0;
+}
+.notification {
+  display: block;
+  padding: 9.6px 12px;
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-color: #eeeeee;
+  background-color: #fff;
+  color: #333333;
+  text-decoration: none;
+}
+.notification:last-child {
+  border-bottom: 0;
+}
+.notification:hover,
+.notification.active:hover {
+  background-color: #f9f9f9;
+  border-color: #eeeeee;
+}
+.notification.active {
+  background-color: #f4f4f4;
+}
+a.notification:hover {
+  text-decoration: none;
+}
+.notification-title {
+  font-size: 15px;
+  margin-bottom: 0;
+}
+.notification-desc {
+  margin-bottom: 0;
+}
+.notification-meta {
+  color: #777777;
+}
+.dropdown-notifications > .dropdown-container,
+.dropdown-notifications > .dropdown-menu {
+  width: 450px;
+  max-width: 450px;
+}
+.dropdown-notifications .dropdown-menu {
+  padding: 0;
+}
+.dropdown-notifications .dropdown-toolbar,
+.dropdown-notifications .dropdown-footer {
+  padding: 9.6px 12px;
+}
+.dropdown-notifications .dropdown-toolbar {
+  background: #fff;
+}
+.dropdown-notifications .dropdown-footer {
+  background: #eeeeee;
+}
+.notification-icon {
+  margin-right: 6.8775px;
+}
+.notification-icon:after {
+  position: absolute;
+  content: attr(data-count);
+  margin-left: -6.8775px;
+  margin-top: -6.8775px;
+  padding: 0 4px;
+  min-width: 13.755px;
+  height: 13.755px;
+  line-height: 13.755px;
+  background: red;
+  border-radius: 10px;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 11.004px;
+  font-weight: 600;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.notification .media-body {
+  padding-top: 5.6px;
+}
+.btn-lg .notification-icon:after {
+  margin-left: -8.253px;
+  margin-top: -8.253px;
+  min-width: 16.506px;
+  height: 16.506px;
+  line-height: 16.506px;
+  font-size: 13.755px;
+}
+.btn-xs .notification-icon:after {
+  content: '';
+  margin-left: -4.1265px;
+  margin-top: -2.06325px;
+  min-width: 6.25227273px;
+  height: 6.25227273px;
+  line-height: 6.25227273px;
+  padding: 0;
+}
+.btn-xs .notification-icon {
+  margin-right: 3.43875px;
+}
+ /* End notification class */
+
+@media(min-width:768px) {
+    body {
+        margin-top: 50px;
+    }
+    /*html, body, #wrapper, #page-wrapper {height: 100%; overflow: hidden;}*/
+}
+.row {
+    margin-right: 0px !important;
+}
+#wrapper {
+    padding-left: 0;    
+}
+
+#page-wrapper {
+    width: 100%;        
+    padding: 0;
+    background-color: #fff;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 225px;
+    }
+
+    #page-wrapper {
+        padding: 22px 10px;
+    }
+}
+
+/* Top Navigation */
+
+.top-nav {
+    padding: 0 15px;
+}
+
+.top-nav>li {
+    display: inline-block;
+    float: left;
+}
+
+.top-nav>li>a {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    line-height: 20px;
+    color: #fff;
+}
+
+.top-nav>li>a:hover,
+.top-nav>li>a:focus,
+.top-nav>.open>a,
+.top-nav>.open>a:hover,
+.top-nav>.open>a:focus {
+    color: #fff;
+    background-color: #1a242f;
+}
+
+.top-nav>.open>.dropdown-menu {
+    float: left;
+    position: absolute;
+    margin-top: 0;
+    /*border: 1px solid rgba(0,0,0,.15);*/
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background-color: #fff;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
+.top-nav>.open>.dropdown-menu>li>a {
+    white-space: normal;
+}
+
+/* Side Navigation */
+
+@media(min-width:768px) {
+    .side-nav {
+        position: fixed;
+        top: 60px;
+        left: 225px;
+        width: 225px;
+        margin-left: -225px;
+        border: none;
+        border-radius: 0;
+        border-top: 1px rgba(0,0,0,.5) solid;
+        overflow-y: auto;
+        background-color: #222;
+        /*background-color: #5A6B7D;*/
+        bottom: 0;
+        overflow-x: hidden;
+        padding-bottom: 40px;
+    }
+
+    .side-nav>li>a {
+        width: 225px;
+        border-bottom: 1px rgba(0,0,0,.3) solid;
+    }
+
+    .side-nav li a:hover,
+    .side-nav li a:focus {
+        outline: none;
+        /* Volto com isso se não for aprovado */
+        /* background-color: #1a242f !important; */
+    }
+}
+
+.side-nav>li>ul {
+    padding: 0;
+    border-bottom: 1px rgba(0,0,0,.3) solid;
+}
+/* Coloquei esssa propriedade abaixo para deixar igual como estava no outro, se bugar eu tiro depois */
+li a .fa {
+    width: 25px;
+}
+
+.side-nav>li>ul>li>a {
+    display: block;
+    padding: 10px 15px 10px 17px;
+    text-decoration: none;
+    /*color: #999;*/
+    color:#9d9d9d;    
+    background-color: #2e2f2f;
+
+}
+
+.side-nav>li>ul>li>a:hover {
+    color: #fff;
+}
+
+.navbar .nav > li > a > .label {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  position: absolute;
+  top: 14px;
+  right: 6px;
+  font-size: 10px;
+  font-weight: normal;
+  min-width: 15px;
+  min-height: 15px;
+  line-height: 1.0em;
+  text-align: center;
+  padding: 2px;
+}
+
+.navbar .nav > li > a:hover > .label {
+  top: 10px;
+}
+
+.navbar-brand {
+    padding: 5px 15px;
+}
+.navbar-brand img {
+    width: 150px;
+    height: 35px;
+    margin-top: 3px;
+}
+.navbar-inverse {
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.35), inset 0 -1px 0 rgba(0,0,0,.1);
+}
+.breadcrumb:not(:last-child) {
+    margin-bottom: 1.5rem;
+}
+.breadcrumb {
+    margin-left: -62px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 1.5rem;
+    overflow: hidden;
+    overflow-x: auto;
+    white-space: nowrap;
+    background-color: rgba(245, 245, 245, 0) !important;
+}
+.breadcrumb ul, .breadcrumb ol {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+}
+.breadcrumb li + li::before {
+    color: #4a4a4a;
+    content: "\0002f";
+}
+.breadcrumb li {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.breadcrumb li:first-child a {
+    padding-left: 0;
+}
+.breadcrumb a {
+    /* -webkit-box-align: center; */
+    -ms-flex-align: center;
+    /* align-items: center; */
+    /* color: #3273dc; */
+    /* display: -webkit-box; */
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 0.5em 0.75em;
+    text-decoration: none;
+}
+a {
+    color: #3273dc;
+    cursor: pointer;
+    text-decoration: none;
+}
+</style>
+</head>
+        <div id="throbber" style="display:none; min-height:120px;"></div>
+        <div id="noty-holder"></div>
+        <div id="wrapper">
+            <!-- Navigation -->
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">                                                
+                        <img src="/static/images/Agil-saga-branco.png" alt="LOGO">
+                    </a>
+                </div>
+                <!-- Top Menu Items -->
+                <ul class="nav navbar-right top-nav">           
+                        <ul class="dropdown-menu">
+                            <div class="dropdown-toolbar">
+                                    <div class="dropdown-toolbar-actions">
+                                        <a href="#">Mark all as read</a>
+                                    </div>
+                                    <h3 class="dropdown-toolbar-title">Notifications (2)</h3>
+                                    </div>
+                            <li class="notification">
+                                <div class="media">
+                                <div class="media-left">
+                                    <div class="media-object">
+                                    <img data-src="holder.js/50x50?bg=cccccc" class="img-circle" alt="50x50" style="width: 50px; height: 50px;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2250%22%20height%3D%2250%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2050%2050%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1623004b48f%20text%20%7B%20fill%3A%23919191%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1623004b48f%22%3E%3Crect%20width%3D%2250%22%20height%3D%2250%22%20fill%3D%22%23cccccc%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%226.4765625%22%20y%3D%2229.5%22%3E50x50%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
+                                    </div>
+                                </div>
+                                <div class="media-body">
+                                    <strong class="notification-title"><a href="#">Dave Lister</a> commented on <a href="#">DWARF-13 - Maintenance</a></strong>
+                                    <p class="notification-desc">I totally don't wanna do it. Rimmer can do it.</p>
+        
+                                    <div class="notification-meta">
+                                    <small class="timestamp">27. 11. 2015, 15:00</small>
+                                    </div>
+                                </div>
+                                </div>
+                            </li>
+        
+                            <li class="notification active">
+                                <div class="media">
+                                <div class="media-left">
+                                    <div class="media-object">
+                                    <img data-src="holder.js/50x50?bg=cccccc" class="img-circle" alt="50x50" style="width: 50px; height: 50px;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2250%22%20height%3D%2250%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2050%2050%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1623004b492%20text%20%7B%20fill%3A%23919191%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1623004b492%22%3E%3Crect%20width%3D%2250%22%20height%3D%2250%22%20fill%3D%22%23cccccc%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%226.4765625%22%20y%3D%2229.5%22%3E50x50%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
+                                    </div>
+                                </div>
+                                <div class="media-body">
+                                    <strong class="notification-title"><a href="#">Nikola Tesla</a> resolved <a href="#">T-14 - Awesome stuff</a></strong>
+        
+                                    <p class="notification-desc">Resolution: Fixed, Work log: 4h</p>
+        
+                                    <div class="notification-meta">
+                                    <small class="timestamp">27. 10. 2015, 08:00</small>
+                                    </div>
+        
+                                </div>
+                                </div>
+                            </li>
+        
+                            <li class="notification">
+                                <div class="media">
+                                <div class="media-left">
+                                    <div class="media-object">
+                                    <img data-src="holder.js/50x50?bg=cccccc" class="img-circle" alt="50x50" style="width: 50px; height: 50px;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2250%22%20height%3D%2250%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2050%2050%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1623004b493%20text%20%7B%20fill%3A%23919191%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1623004b493%22%3E%3Crect%20width%3D%2250%22%20height%3D%2250%22%20fill%3D%22%23cccccc%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%226.4765625%22%20y%3D%2229.5%22%3E50x50%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
+                                    </div>
+                                </div>
+                                <div class="media-body">
+                                    <strong class="notification-title"><a href="#">James Bond</a> resolved <a href="#">B-007 - Desolve Spectre organization</a></strong>
+        
+                                    <div class="notification-meta">
+                                    <small class="timestamp">1. 9. 2015, 08:00</small>
+                                    </div>
+        
+                                </div>
+                                </div>
+                            </li>
+                            <div class="dropdown-footer text-center">
+                                <a href="#">Ver todas</a>
+                                </div><!-- /dropdown-footer -->
+                        </ul>                                                                        
+                    </li>          
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="https://app.kazah.com.br/img/newuser.png" class="img-circle" style="margin-right: 10px" alt="Cinque Terre" width="20" height="20"> {% if user.is_authenticated %}
+                            {{ user.userprofile.pessoa.nome }}
+                            {% endif %} <b class="fa fa-angle-down"></b></a>
+                        <ul class="dropdown-menu">
+                            {% if perms.sagacore.ver_empresa_preferencias %}
+                            {% endif %}
+                            <li class="divider"></li>                            
+                        </ul>
+                    </li>
+                </ul>
+                <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav side-nav">    
+                        <li>
+                            <a href="#" data-toggle="collapse" data-target="#submenu-2"><i class="fa fa-folder"></i> Cadastros <i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                            <ul id="submenu-2" class="collapse">
+                                <li><a href="{% url 'cadastrar_aula' %}"><i class="fa fa-users"></i> Cadastro de Aula </a></li>
+                                <li><a href=><i class="fa fa-archive"></i> Cadastro de Módulos </a></li>
+                                <li><a href=><i class="fa fa-book"></i> Cadastro de Cursos </a></li>                        
+                               <!-- {% if perms.sagacore.list_importacao %}
+                                    {% endif %} -->
+                            </ul>
+                        </li>
+                        {% if request.session.curso_web_ativo %}
+                        <li>
+                            <a href="#" data-toggle="collapse" data-target="#submenu-3"><i class="fa fa-folder"></i>  Administração Web <i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                            <ul id="submenu-3" class="collapse">
+                                <li><a href=><i class="fa fa-desktop"></i> Cursos Web </a></li>
+                                <li><a href=><i class="fa fa-shopping-basket "></i> Oferta de Curso </a></li>
+                                <li><a href=><i class="fa fa-bullseye"></i> Lista de Interesses </a></li>                
+                            </ul>
+                        </li>
+                        {% endif %}    
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </nav>
+            <div id="page-wrapper">
+                <div class="container-fluid">
+                    <!-- Page Heading -->
+                    <div class="row" id="main" >                             
+                            <!-- Mensagens de erro! -->
+                            {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-info">
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                                    {{message}}
+                                </div>
+                            {% endfor %}
+                            {% endif %}                                                                                                                                                            
+                    </div>
+                    <nav class="breadcrumb" aria-label="breadcrumbs">
+                        <ul>
+                        </ul>
+                    </nav>
+
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                                {% block pageTitle %}
+                                {% endblock %}
+                        
+                        </div>
+                        <div class="panel-body">
+                          
+                                {% block content %}
+                                {% endblock %}
+                        </div>
+                      </div>
+
+                      <footer class="footer" style="padding: 1rem 0.5rem;background-color: whitesmoke;">
+                          <div class="row">
+                              <div class="col-md-4 col-md-offset-5">
+                                    <div class="">
+                                            <p>© 2018 - Todos os direitos reservados. </p>
+                                        </div>
+                              </div>
+                          </div>
+                        </footer>
+
+                      
+
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /#page-wrapper -->
+        </div><!-- /#wrapper -->
+    </html>
+
+<script>    
+$(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+    $(".side-nav .collapse").on("hide.bs.collapse", function() {                   
+        $(this).prev().find(".fa").eq(1).removeClass("fa-angle-right").addClass("fa-angle-down");
+    });
+    $('.side-nav .collapse').on("show.bs.collapse", function() {                        
+        $(this).prev().find(".fa").eq(1).removeClass("fa-angle-down").addClass("fa-angle-right");        
+    });
+
+//Máscaras nos inputs
+$('#id_data_nascimento').mask('00/00/0000');
+$('#id_cpf').mask('000.000.000-00');
+$('#id_cep').mask('00000-000');
+$('#id_numero_fixo').mask('(00) 0000-0000');
+$('#id_numero_celular').mask('(00) 00000-0000');
+$('#id_cnpj').mask('00.000.000/0000-00', {placeholder: "Ex: 00.000.000/0000-00"}, {reverse: true});
+
+})    
+
+</script>
+{% block scripts %}
+{% endblock %}
+    {% endif %} 
+
 
 
 

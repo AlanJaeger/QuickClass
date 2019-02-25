@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'admin/', admin.site.urls),
     url(r'administrador',DashboardAdm.as_view()),
     url(r'pedidos',DashboardPedidos.as_view(), name = 'pedidos'),
-    url(r'aluno',DashboardAluno.as_view(), name = 'aluno'),
+    url(r'aluno/',DashboardAluno.as_view(), name = 'aluno'),
     url(r'aprovar/(?P<id_candidato>\d+)/',AprovarEntrada.as_view(), name = 'aprovar'),
     url(r'update',UpdateImagem.as_view(), name = 'update'),
     #url(r'^login/$', Login.as_view(), name='login'),
