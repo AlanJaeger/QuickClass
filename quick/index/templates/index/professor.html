@@ -56,50 +56,55 @@
             <div class="col-md-12">
                 <div class="card card-style">
                     <div class="row">
-                        <!-- <div class="col-6">
+                        <div class="col-6">
                             <div class="card border-secondary mt-5 mb-3 ml-5" style="max-width: 18rem;">
-                                <div class="card-header">Header</div>
+                                <div class="card-header">Você é importante para nós</div>
                                 <div class="card-body text-secondary">
-                                    <h5 class="card-title">Secondary card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <h5 class="card-title">Trabalhe conosco</h5>
+                                    <p class="card-text">Cadastre-se atráves da planilha ao lado e aguarde nossa análise.</p>
                                 </div>
                             </div>
-                        </div> -->
-                        <div class="col-md-6 offset-md-3">
-                            <form class="mt-5 mr-5" action='{%url "agenda"%}' enctype="multipart/form-data" method="POST">
+                        </div>
+                        <div class="col-6">
+                            <form class="mt-5 mr-5" action='{%url "professor"%}' enctype="multipart/form-data" method="POST">
                               
                                 {% csrf_token %}
                                 <div class="form-row">
-                                    <!-- <div class="form-group col-md-4">
+                                    <div class="form-group col-md-6">
+                                        <img src="{%static "img/img_avatar.png"%}" alt="Avatar" style="width:200px; border-radius: 50%;">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                            <label for="id_foto"  class="custom-file-upload btn btn-light" style="margin-bottom: 0px; margin-top: 32px;">Carregue seu curriculo em PDF</label>
+                                            {{form.foto}}
                                             <label for="inputState" class="form-text" style="margin-top: 18px;">Disciplina a ministrar</label>
                                             {{form.disciplina}}
-                                    </div> -->
+                                    </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label for="inputEmail4" class="form-text">Dia</label>
-                                        {{form.dia}}
+                                        <label for="inputEmail4" class="form-text">Nome</label>
+                                        {{form.nome}}
                                         </div>
                                     <div class="form-group col-md-6">
-                                        <label for="inputEmail4" class="form-text">Horario</label>
-                                        {{form.horario}}
+                                        <label for="inputEmail4" class="form-text">Sobrenome</label>
+                                        <input type="text" class="form-control" placeholder="Segundo Nome" name="sobrenome">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
-                                        <label for="inputEmail4" class="form-text">Duração</label>
-                                        {{form.duracao}}
+                                        <label for="inputEmail4" class="form-text">Data de Nascimento</label>
+                                        <input type="date" class="form-control" name="data_nascimento">
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="inputEmail4" class="form-text">Disciplina</label>
-                                        {{form.disciplina}}
+                                        <label for="inputEmail4" class="form-text">CPF</label>
+                                        <input type="text" class="form-control" name="cpf">
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="inputEmail4" class="form-text">Conteudo</label>
-                                        {{form.conteudo}}
+                                        <label for="inputEmail4" class="form-text">Telefone</label>
+                                        <input type="tel" class="form-control" name="telefone">
                                     </div>
                                 </div>
-                                <!-- <div class="form-row">
+                                <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="inputEmail4" class="form-text">Email</label>
                                         <input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email">
@@ -108,16 +113,16 @@
                                         <label for="inputPassword4" class="form-text">Senha</label>
                                         <input type="password" class="form-control" id="inputPassword4" placeholder="Senha" name="senha">
                                     </div>
-                                </div> -->
-                                <!-- <div class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label for="inputAddress" class="form-text">Endereço</label>
                                     <input type="text" class="form-control" id="inputAddress" placeholder="Rua, Avenida..." name="endereco">
                                 </div>
                                 <div class="form-group">
                                     <label for="inputAddress2" class="form-text">Complemento</label>
                                     <input type="text" class="form-control" id="inputAddress2" placeholder="Apartamento,Loja..." name="complemento">
-                                </div> -->
-                                <!-- <div class="form-row">
+                                </div>
+                                <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="inputCity" class="form-text">Cidade</label>
                                         <input type="text" class="form-control" id="inputCity" name="cidade">
@@ -137,7 +142,7 @@
                                         <label for="inputZip" class="form-text">CEP</label>
                                         <input type="text" class="form-control" id="inputZip" name="cep">
                                     </div>
-                                </div> -->
+                                </div>
                                 <button type="submit" class="btn btn-outline-light">Cadastrar</button>
                             </form>
                         </div>
@@ -149,40 +154,53 @@
     <!--Card Form-->
 
     <!--Footer-->
-    <!-- <footer class="page-footer font-medium unique-color-dark pt-0" style="max-width: 100%;background-color: #1e1e1e;">
+    <footer class="page-footer font-medium unique-color-dark pt-0" style="max-width: 100%;background-color: #1e1e1e;">
 
         <div>
             <div class="container">
+                <!--Grid row-->
                 <div class="row py-4 d-flex align-items-center" style="margin-bottom: -32px">
+
+                    <!--Grid column-->
                     <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
                         <h5 class="mb-0">Nós também estamos nas redes sociais!</h5>
                     </div>
-                   
+                    <!--Grid column-->
+
+                    <!--Grid column-->
                     <div class="col-md-6 col-lg-7 text-center text-md-right">
+                        <!--Facebook-->
                         <a class="edit-text" style="text-decoration: none;" href="https://www.facebook.com/agilsistemas.net/">
                             <i class="fa fa-facebook mr-lg-4"> </i>
                         </a>
+                        <!--Linkedin-->
                         <a class="edit-text" style="text-decoration: none;" href="https://www.linkedin.com/company/agilsistemasweb/">
                             <i class="fa fa-linkedin mr-lg-4"> </i>
                         </a>
+                        <!--Instagram-->
                         <a class="edit-text" style="text-decoration: none;" href="https://www.instagram.com/agil_sistemas/">
                             <i class="fa fa-instagram mr-lg-4"> </i>
                         </a>
                     </div>
+                    <!--Grid column-->
 
                 </div>
+                <!--Grid row-->
             </div>
-        </div> -->
+        </div>
 
-        <!-- <div class="container mt-5 mb-4 text-center text-md-left">
+        <!--Footer Links-->
+        <div class="container mt-5 mb-4 text-center text-md-left">
                 <div class="row mt-3">
+    
+                    <!--First column-->
                     <div class="col-md-3 col-lg-4 col-xl-3 mb-4">
-                        <h6 class="text-uppercase font-weight-bold"> -->
+                        <h6 class="text-uppercase font-weight-bold">
                             <!-- <strong>Agil sistemas</strong> -->
-                        <!-- </h6>
+                        </h6>
                         <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width:60px; color:white;">
                         <p style="margin-top:-39px">Somos uma empresa que desenvolve tecnologia para a área de educação e desenvolvimento humano, oferecendo soluções inovadoras e customizadas.</p>
-                    </div> -->
+                    </div>
                     <!--/.First column-->
     
                     <!--Second column-->
@@ -204,22 +222,22 @@
                     <!--/.Second column-->
     
                     <!--Third column-->
-                    <!-- <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                         <h6 class="text-uppercase font-weight-bold">
                             <strong>Links Úteis</strong>
                         </h6>
                         <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto edit-text" style="width: 60px;">
-                        <p> -->
-                            <!-- <a class="edit-text" style="text-decoration: none;" href="/professor">Trabalhe Conosco</a> -->
-                        <!-- </p>
+                        <p>
+                                <a class="edit-text" style="text-decoration: none;" href="/equipe">Quem Somos</a>
+                            </p>
                         <p>
                             <a class="edit-text" style="text-decoration: none;" href="#!">Ajuda</a>
                         </p>
-                    </div> -->
+                    </div>
                     <!--/.Third column-->
     
                     <!--Fourth column-->
-                    <!-- <div class="col-md-4 col-lg-3 col-xl-3">
+                    <div class="col-md-4 col-lg-3 col-xl-3">
                         <h6 class="text-uppercase font-weight-bold">
                             <strong>Contato</strong>
                         </h6>
@@ -230,7 +248,7 @@
                             <i class="fa fa-envelope mr-3"></i><a class="edit-text" style="text-decoration: none;" href="mailto:suporte@agilsistemas.net.br">suporte@agilsistemas.net.br</a></p>
                         <p>
                             <i class="fa fa-phone mr-3"></i>(84) 2226-8230</p>
-                    </div> -->
+                    </div>
                     <!--/.Fourth column-->
     
                 </div>
@@ -238,15 +256,15 @@
             <!--/.Footer Links-->
 
         <!-- Copyright-->
-        <!-- <div class="footer-copyright py-3 text-center" style="margin-top: -50px">
+        <div class="footer-copyright py-3 text-center" style="margin-top: -50px">
             © 2018 Copyright:
             <a class="edit-text" style="text-decoration: none;" href="https://mdbootstrap.com/material-design-for-bootstrap/">
                 <strong> agilsistemas.net.br</strong>
             </a>
-        </div> -->
+        </div>
         <!--/.Copyright -->
 
-    <!-- </footer> -->
+    </footer>
     <!--/.Footer-->
 </body>
 

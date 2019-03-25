@@ -3,53 +3,32 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import datetime
 from django.views import View
-from index.models import ProfessoresInteressados, Professor, Disciplina, Aula, Grade
-from .forms import InteresseForm, ProfessorForm, PedidoForm, AulaForm, UserForm, GradeFormSet, GradeForm
+from index.models import ProfessoresInteressados, Professor, Disciplina, Aulas
+from .forms import InteresseForm, ProfessorForm, PedidoForm, AulaForm, UserForm
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
-from django.views.generic import CreateView, UpdateView
-from django.utils import timezone
+
+
+
 
 # Create your views here.
 
 class DashboardView(View):
 
-    def get(self, request):        
+    def get(self, request):
         return render(request,'index/index.html')
 
     # def professor(request):
         # return render(request,'index/professor.html')from
 
-class DashboardProfessor(CreateView):
-    model = Grade
-    form_class = GradeForm
-    def get_context_data(self, **kwargs):
-        professor = Professor.objects.get(user=self.request.user)
-        
-        grade = Grade.objects.filter(professor=professor) 
-        if grade.exists():
-            grade = Grade.objects.get(professor=professor) 
-            grade_agenda_formset = GradeForm(instance=grade)
-        else:
-            grade_agenda_formset = GradeForm()
-        ctx = {
-            'frm': grade_agenda_formset,
-        } 
-
-        return ctx
-
-    def form_valid(self, form):
-        grade = form.save(commit=False)   
-        professor = Professor.objects.get(user=self.request.user)   
-        grade.professor = professor
-        grade.save()
-        de = str(grade.de) + ' 03:00:00'
-        ate = str(grade.ate) + ' 03:00:00' 
-        de = datetime.datetime.strptime(de, "%Y-%m-%d %H:%M:%S")
-        ate = datetime.datetime.strptime(ate, "%Y-%m-%d %H:%M:%S")
-        grade.gerar_grade(de, ate)
-
-        return redirect('/professor/')
+class DashboardProfessor(View):
+    def get(self, request):
+        form = InteresseForm()
+        return render(request,'index/professor.html',{'form': form})
+    def post(self, request):
+        form = InteresseForm(request.POST, request.FILES)
+        form.save()
+        return render(request,'index/professor.html')
 
 class DashboardAdm(View):
     def get(self, request):
@@ -60,9 +39,9 @@ class DashboardPedidos(View):
         pedidos = ProfessoresInteressados.objects.all()
         return render(request,'index/pedidos.html', {'pedidos': pedidos})
 
-class DashboardAula(View):
+class DashboardAulas(View):
     def get(self, request):
-        Aula = Aula.objects.all()
+        aulas = Aulas.objects.all()
         return render(request, 'index/cadastroAula.html,', {'aula': aula})
     
 
@@ -70,8 +49,8 @@ class DashboardAluno(View):
     def get(self, request): 
         disciplinas = Disciplina.objects.all()
         professores = ProfessoresInteressados.objects.filter(aprovacao = True)
-        Aula = Aula.objects.all()
-        return render(request, 'index/aluno.html',{'professores':professores, 'disciplinas':disciplinas, 'Aula':Aula})
+        aulas = Aulas.objects.all()
+        return render(request, 'index/aluno.html',{'professores':professores, 'disciplinas':disciplinas, 'aulas':aulas})
 
 class AprovarEntrada(View):
     def post(self, request,id_candidato):        
@@ -156,21 +135,8 @@ class CadastroAula(View):
 
 class AgendaProfessor(View):
     def get(self, request):
-        professor = Professor.objects.get(user=self.request.user)   
-        
-        if request.GET.get('dia') == None:
-            dia = datetime.datetime.now().strftime("%d-%m-%Y")
-        else:
-            dia = request.GET.get('dia')
-
-        dia = timezone.make_aware(datetime.datetime.strptime(dia, '%d-%m-%Y'))
-        aulas = Aula.objects.filter(professor=professor, dt_aula__date=dia.date())
-        print(len(aulas))
-        ctx = {
-            'aulas': aulas
-        }
-
-        return render(request,'index/agenda.html', ctx)
+        form = AulaForm()
+        return render(request,'index/agenda.html',{'form': form})
 
 
     def post(self, request):
