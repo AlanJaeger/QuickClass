@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ProfessoresInteressados,Professor, Disciplina, Aulas
+from .models import ProfessoresInteressados,Professor, Disciplina, Aula
 
 
 
@@ -8,5 +8,5 @@ from .models import ProfessoresInteressados,Professor, Disciplina, Aulas
 admin.site.register(ProfessoresInteressados)
 admin.site.register(Professor)
 admin.site.register(Disciplina)
-admin.site.register(Aulas)
+admin.site.register(Aula)
 

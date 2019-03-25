@@ -10,14 +10,15 @@
     <link rel="icon" type="image/icon" href="{% static "img/simboloQuick.png"%}">
 
     <!--CSS do Bootstrap-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></head>
 
     <!--CSS Quick Class-->
     <link rel="stylesheet" type="text/css" href="{%static "css/FormProfessor.css"%}">
 
-    <!--Fonts CSS-->
-    <link href="{% static "https://fonts.googleapis.com/css?family=Yantramanav:700"%}" rel="stylesheet">
 </head>
 
 <body>
@@ -31,18 +32,14 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home
-                        <span class="sr-only">(current)</span>
+                        <a class="nav-link" href="#">Agenda
                       </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="#">Grade</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a  class="nav-link" href=/logout/>Sair</a> 
                     </li>
                 </ul>
             </div>
@@ -56,90 +53,47 @@
             <div class="col-md-12">
                 <div class="card card-style">
                     <div class="row">
-                        <!-- <div class="col-6">
-                            <div class="card border-secondary mt-5 mb-3 ml-5" style="max-width: 18rem;">
-                                <div class="card-header">Header</div>
-                                <div class="card-body text-secondary">
-                                    <h5 class="card-title">Secondary card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                        </div> -->
-                        <div class="col-md-6 offset-md-3">
-                            <form class="mt-5 mr-5" action='{%url "agenda"%}' enctype="multipart/form-data" method="POST">
-                              
-                                {% csrf_token %}
-                                <div class="form-row">
-                                    <!-- <div class="form-group col-md-4">
-                                            <label for="inputState" class="form-text" style="margin-top: 18px;">Disciplina a ministrar</label>
-                                            {{form.disciplina}}
-                                    </div> -->
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputEmail4" class="form-text">Dia</label>
-                                        {{form.dia}}
+                            <div class="col-md-3">
+                                <div class="card border-secondary mt-5 mb-5 ml-5" >
+                                    <div class="card-header">Calendário</div>
+                                    <div class="card-body text-secondary">
+                                        <div class="center">
+                                            <div id="data_agendamento"  class="calendar"></div>
                                         </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="inputEmail4" class="form-text">Horario</label>
-                                        {{form.horario}}
                                     </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-4">
-                                        <label for="inputEmail4" class="form-text">Duração</label>
-                                        {{form.duracao}}
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="inputEmail4" class="form-text">Disciplina</label>
-                                        {{form.disciplina}}
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="inputEmail4" class="form-text">Conteudo</label>
-                                        {{form.conteudo}}
-                                    </div>
-                                </div>
-                                <!-- <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputEmail4" class="form-text">Email</label>
-                                        <input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="inputPassword4" class="form-text">Senha</label>
-                                        <input type="password" class="form-control" id="inputPassword4" placeholder="Senha" name="senha">
-                                    </div>
-                                </div> -->
-                                <!-- <div class="form-group">
-                                    <label for="inputAddress" class="form-text">Endereço</label>
-                                    <input type="text" class="form-control" id="inputAddress" placeholder="Rua, Avenida..." name="endereco">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputAddress2" class="form-text">Complemento</label>
-                                    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartamento,Loja..." name="complemento">
-                                </div> -->
-                                <!-- <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputCity" class="form-text">Cidade</label>
-                                        <input type="text" class="form-control" id="inputCity" name="cidade">
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="inputState" class="form-text">Estado</label>
-                                        <select id="inputState" class="form-control" name="estado"> 
-                                                <option selected>Selecione</option>
-                                                <option>Rio Grande do Norte</option>
-                                                <option>São Paulo</option>
-                                                <option>Rio de Janeiro</option>
-                                                <option>Pará</option>
-                                                <option>Acre</option>
-                                            </select>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="inputZip" class="form-text">CEP</label>
-                                        <input type="text" class="form-control" id="inputZip" name="cep">
-                                    </div>
-                                </div> -->
-                                <button type="submit" class="btn btn-outline-light">Cadastrar</button>
-                            </form>
+                                </div>                            
+                            </div>
+                        
+                        <div class="col-md-8">
+                                <!-- <div class="card card-style"> -->
+                                        <div class="card border-secondary mt-5 mb-5 ml-5" >
+                                            <div class="card-header">Você é importante para nós</div>
+                                                <div class="card-body text-secondary">
+                            <table class="table table-condensed table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="col-md-1">Hora</th>
+                                    <th></th>
+                                    <th class="col-md-3">Aluno</th>
+                                    <th class="col-md-2">Email</th>
+                                    <th class="col-md-3">Celular</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {% for aula in aulas %}
+                                    <tr>
+                                        <td>{{aula.dt_aula|time}}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            </div>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -253,9 +207,23 @@
 </html>
 
 <!--JS e JQ do Bootstrap-->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script> -->
 
 <!--JS do Quick-->
 <script type="text/javascript" src="{%static "js/professor.js"%}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+<script>    
+    $(function() {
+        $('#data_agendamento').datepicker({
+                uiLibrary: 'bootstrap4',
+            }).on('changeDate', function (e) {
+                location.href = '{% url 'agenda'  %}' + '?dia='+ e.format('dd-mm-yyyy');
+            }).datepicker('update', '{{ dia|date:'d-m-Y' }}');  
+    });
+</script>
