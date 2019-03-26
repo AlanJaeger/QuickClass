@@ -30,6 +30,7 @@
 <style>
     .modal-lg {
     max-width: 900px;
+    
 }
 </style>
 <body>
@@ -52,17 +53,19 @@
                  <a class="signin-button text-signin" style="text-decoration:none;" href=/logout/>Sair</a> 
             </div>
             {% else %}
-            <div class="col-md-2" style=" max-width:156px; margin-left:115px;">
+            <div class="col-md-2 iniciar" style=" max-width:156px; margin-left:115px;">
                 <a class="signin-button text-signin" style="text-decoration:none;" href=/login/>Iniciar Sessão</a> 
            </div>
            {% endif %}
            {% if not user.is_authenticated %}
-            <div class="col-md-2" style=" max-width:144px;">
+            <div class="col-md-2 registro" style=" max-width:144px;">
                 <a class="signin-button text-signin" style="text-decoration:none;" href=/cadastro/>Registrar-se</a> 
            </div>
            {% endif %}
-           <div class="col-md-2">
-                <a class="signin-button text-signin" style="text-decoration:none;" href=/professor/>Torne-se um professor</a> 
+           
+           <div class="col-md-2 professor">
+                <a class="signin-button text-signin desktop" style="text-decoration:none;" href=/professor/>Torne-se um professor</a>
+                <a class="signin-button text-signin mobile" style="text-decoration:none;" href=/professor/>Professor</a> 
            </div>
         </div>
         <div class="row">
@@ -70,16 +73,13 @@
                 <h1 class="pitch_title">Os melhores professores do RN <br> em um só lugar <br>
                 </h1>
                 <p class="pitch_subtitle">QUICK CLASS O SEU PORTAL DE AULAS ONLINE</p>
-                <a href="{% url 'aluno' %} " class="btn-edit text-edit">Acesse o nosso catalogo</a>
+                <a href="{% url 'aluno' %} " class="btn-edit text-edit rr">Acesse o nosso catalogo</a>
                 
-                <div class="row">
-                    <div class="col-md-12">
+                
                         <p class ="subtitulo" style="margin-left:291px;">
                             Conheça o nosso time de professores
                         </p>
-                    </div>
-                    
-                </div>
+                  
                 
             </div>
         </div>
@@ -209,7 +209,7 @@
                                                 margin-top: 6px;
                                                 margin-bottom: 23px;">Prof. Sthéphanye Revoredo</h5>
                                                 <h6 class="card-subtitle mb-2 text-muted" style="margin-left: 28px;
-                                                font-size: 22px;">Biologia</h6>
+                                                font-size: 22px;">Inglês</h6>
                                         </div>
                                           <p class="card-text" style="font-weight:bolder; color:black; font-family:'Roboto',sans-serif;
                                           font-size: 155%;
@@ -352,7 +352,7 @@
                                                 margin-top: 6px;
                                                 margin-bottom: 23px;">Prof.Miracildo Quintino</h5>
                                                 <h6 class="card-subtitle mb-2 text-muted" style="margin-left: 28px;
-                                                font-size: 22px;">Matemática</h6>
+                                                font-size: 22px;">Fisica</h6>
                                         </div>
                                           <p class="card-text" style="font-weight:bolder; color:black; font-family:'Roboto',sans-serif;
                                           font-size: 155%;
@@ -514,7 +514,7 @@
 
                 <a class="column" href="#" data-id="watchanywhere">
                     <img alt="Watch anywhere" src="{% static "img/customer.svg" %}" />
-                    <h2>
+                    <h2 class="serv">
                         Conheça outros serviços
                     </h2>
                 </a>
@@ -593,7 +593,7 @@
                 <div class="columns size-90 center">
                     <div class="column text-center">
                        <div class="row">
-                <div class="col-md-3" style="max-width: 20%;">
+                <div class="col-md-3 servicos" style="max-width: 20%;">
                     <div class="info-icon">
                         <div class="icon zoom" style="color:white; font-size:55px">
                                 <i class="fas fa-chalkboard-teacher"></i>
@@ -601,7 +601,7 @@
                         <p class="description">Aulas Particulares Online</p>
                     </div>
                 </div>
-                <div class="col-md-3" style="max-width: 20%;">
+                <div class="col-md-3 servicos" style="max-width: 20%;">
                     <div class="info-icon">
                         <div class="icon zoom" style="color: white; font-size: 55px">
                                 <i class="fas fa-th-large"></i>
@@ -609,7 +609,7 @@
                         <p class="description">Módulos de conteúdos</p>
                     </div>
                 </div>
-                <div class="col-md-3" style="max-width: 20%;">
+                <div class="col-md-3 servicos" style="max-width: 20%;">
                     <div class="info-icon">
                         <div class="icon zoom" style="color: white; font-size: 50px">
                                 <i class="fas fa-book"></i>
@@ -618,7 +618,7 @@
                     </div> 
                 </div>
 
-                <div class="col-md-3" style="max-width: 20%;">
+                <div class="col-md-3 servicos" style="max-width: 20%;">
                     <div class="info-icon">
                         <div class="icon zoom" style="color: white; font-size: 55px">
                                 <i class="fas fa-brain"></i>
@@ -627,7 +627,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-3" style="max-width: 20%;">
+                <div class="col-md-3 servicos" style="max-width: 20%;">
                         <div class="info-icon">
                             <div class="icon zoom" style="color: white; font-size: 55px">
                                     <i class="fas fa-hand-holding-heart"></i>
@@ -653,7 +653,7 @@
         <div>
             <div class="container">
                 <!--Grid row-->
-                <div class="row py-4 d-flex align-items-center" style="margin-bottom: -32px">
+                <div class="row py-4 d-flex align-items-center rodape" style="margin-bottom: -32px">
 
                     <!--Grid column-->
                     <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
@@ -688,12 +688,13 @@
             <div class="row mt-3">
 
                 <!--First column-->
-                <div class="col-md-3 col-lg-4 col-xl-3 mb-4">
+                <div class="col-md-3 col-lg-4 col-xl-3 mb-4 rodape2">
                     <h6 class="text-uppercase font-weight-bold" style="margin-bottom:22px;">
                          <strong>Quick Class</strong> 
                     </h6>
                     <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width:60px; color:white;">
                     <p style="margin-top:-39px">Aprenda aonde e quando quiser!</p>
+                    <p style="">Somos um portal educacional que leva os melhores professores para dentro da sua casa.</p>
                 </div>
                 <!--/.First column-->
 
@@ -716,7 +717,7 @@
                 <!--/.Second column-->
 
                 <!--Third column-->
-                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 rodape2">
                     <h6 class="text-uppercase font-weight-bold">
                         <strong>Links Úteis</strong>
                     </h6>

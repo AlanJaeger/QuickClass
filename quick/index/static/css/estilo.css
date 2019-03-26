@@ -519,11 +519,19 @@ p.description{
     font-size: 38px;
 }
 
+.mobile{
+    display: none;
+}
+
+.desktop{
+    display: block
+}
 @media screen and (max-width : 768px) {
     .subtitulo{
-        margin-left: 36px;
-        margin-top: 257px;
-        font-size: 23px;
+        margin-left: 23px !important;
+        font-size: 18px !important;
+        margin-left: 21px !important;
+        margin-top: 70px !important;
     }
     .nav-text{
         display: -ms-flexbox;
@@ -535,7 +543,49 @@ p.description{
         list-style: none;
         margin-left: -28px;
     }
+
+    .mobile{
+        display: block;
+    }
+    .desktop{
+        display: none;
+    }
+    .iniciar{
+        max-width: 156px  !important;
+        margin-left: -10px  !important;
+        margin-right: 0px  !important;
+    }
+    .registro{
+        max-width: 144px  !important;
+        margin-left: -28px !important;
+    }
+    .professor{
+        margin-left: -264px;
+    }
+    .pitch_subtitle{
+        margin: -1px 0px 3.5em;
+    }
+    .center.slider{
+        margin-top: -190px!important;
+    }
+    .modal-lg{
+        max-width: 450px;
+    }
+    .servicos{
+        max-width: 50% !important;
+    }
+    .serv{
+        font-size: 22px !important;
+    }
+    .rodape{
+        margin-left: -68px !important;
+    }
+    .rodape2{
+        margin-left: -26px !important;
+    }
 }
+
+
 
 
 
