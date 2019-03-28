@@ -66,7 +66,7 @@ class GradeForm(forms.ModelForm):
     }))
     inicio = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     fim = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    intervalo = forms.CharField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    intervalo = forms.CharField(widget=forms.NumberInput(attrs={'class': 'form-control', 'min': 0}))
 
     def clean(self):
         de = self.cleaned_data.get('de')
