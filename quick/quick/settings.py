@@ -29,7 +29,7 @@ SECRET_KEY = '-$i+qzh^w#$_@r0^ra-ye2uk0a7*oa&ut-8u+j=*+r+ycioo-4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'quick.wsgi.application'
 DATABASES = {
     'default': decouple.config(
         'DATABASE_URL',
-        default='postgres://postgres:postgres@localhost:5432/quickclass2',
+        default='postgres://postgres:postgres@localhost:5432/quick',
         cast=database
     )
 }
