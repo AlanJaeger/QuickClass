@@ -1,39 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
-
-
+from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
+from datetime import timedelta, datetime, time
+from multiselectfield import MultiSelectField
 
 # Create your models here.
-
-
-class ProfessoresInteressados(models.Model):
-    nome = models.TextField(max_length = 200)
-    sobrenome = models.TextField(max_length = 200)
-    data_nascimento = models.DateField(null=True, blank=True)
-    cpf = models.CharField(max_length=14, null=True, blank=True)
-    telefone = models.CharField(max_length=16, null=True, blank=True)
-    email = models.EmailField(max_length=100, null=True, blank=True)
-    senha = models.TextField(max_length=100, null=True, blank=True)
-    endereco = models.TextField(max_length= 200, null=True, blank=True)
-    complemento = models.CharField(max_length=255, blank=True, null=True)
-    cidade =  models.CharField(max_length=40, blank=True, null=True)
-    estado =  models.CharField(max_length=40, blank=True, null=True)
-    cep = models.CharField(max_length=9, blank=True, null=True)
-    foto = models.ImageField(upload_to='professores', blank=True, null=True)
-    disciplina = models.ForeignKey('Disciplina', on_delete=models.PROTECT)
-    aprovacao = models.BooleanField(default=False)
-
-
-class Professor(models.Model):
-    nome = models.TextField(max_length = 200)
-    sobrenome = models.TextField(max_length = 200)
-    cep = models.CharField(max_length=9, blank=True, null=True)
-    foto = models.FileField(upload_to='media/', blank=True, null=True)
-    disciplina = models.ForeignKey('Disciplina', on_delete=models.PROTECT)
-
-    def __str__(self):
-        return self.nome
 
 class Disciplina(models.Model):
     nome = models.TextField()
@@ -41,20 +14,183 @@ class Disciplina(models.Model):
 
     def __str__(self):
         return self.nome
-    def professores(self):
-        return ProfessoresInteressados.objects.filter(disciplina = self)
 
-class Aulas(models.Model):
-    Professor = models.ForeignKey('ProfessoresInteressados', on_delete= models.PROTECT, null = True)
-    dia = models.DateField(blank=True, null = True)
-    horario = models.TimeField(blank = True, null = True)
-    duracao = models.TimeField(blank = True, null = True)
-    disciplina = models.TextField(blank = True, max_length = 100)
-    conteudo = models.TextField(blank = True, max_length = 100)
+
+
+class Professor(models.Model):
+    user = models.OneToOneField(User,
+                                   null=True,
+                                   blank=True,
+                                   related_name='professor',
+                                   on_delete=models.DO_NOTHING)
+    nome = models.CharField(max_length = 80)
+    sobrenome = models.CharField(max_length = 80)
+    cep = models.CharField(max_length=9, blank=True, null=True)
+    foto = models.FileField(upload_to='media/', blank=True, null=True)
+    disciplina = models.ForeignKey('Disciplina', on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.disciplina
+        return self.nome
 
+class Aula(models.Model):
+    ABERTO = 1
+    AGENDADO = 2
+    BLOQUEADO = 3
+    ATENDIDO = 4
+
+    SITUACAO_CHOICES = (
+        (ABERTO, _('Disponivel')),
+        (AGENDADO, _('Agendado')),
+        (BLOQUEADO, _('Bloqueado')),
+        (ATENDIDO, _('Atendido')),
+    )
+
+    dt_aula = models.DateTimeField(_('Data Aula'), null=True)
+    situacao = models.IntegerField(_('Situação'), choices=SITUACAO_CHOICES, default=ABERTO)
+    professor = models.ForeignKey(Professor, on_delete= models.PROTECT, null = True)
+    grade = models.ForeignKey('Grade', null=True, blank=True, on_delete = models.SET_NULL)
+    nome_paciente =  models.CharField(_('Nome'), max_length=80)
+    telefone_paciente = models.CharField(verbose_name='Telefone', max_length=20, blank=True, null=True)
+
+    # AgendamentoBloqueadoException = AgendamentoBloqueadoException
+    # AgendamentoAtendidoException = AgendamentoAtendidoException
+    # AulaNaoPertenceMesAtualException = AulaNaoPertenceMesAtualException
+
+    class Meta:
+        db_table = 'core_aula'
+        ordering = ['dt_aula', ]
+        default_related_name = 'aulas'
+
+    def cancelar_aula(self):
+
+        if self.situacao == self.ATENDIDO:
+            raise AgendamentoAtendidoException(
+                _('Não é possivel cancelar um aula que foi ATENDIDO.'))
+
+        if self.situacao == self.BLOQUEADO:
+            raise AgendamentoBloqueadoException(
+                _('Não é possivel cancelar um aula que esta BLOQUEADO.'))
+
+        self.dt_chegada = None
+        self.paciente = None
+        self.dt_aula = None
+        self.situacao = self.ABERTO
+        self.usuario = None
+        self.prioridade = False
+        self.procedimentos_aula.all().delete()
+        self.recebimentos.all().delete()
+        self.save()
+
+    def bloquear_aula(self):
+        if self.situacao == self.ATENDIDO:
+            raise AgendamentoAtendidoException(
+                _('Não é possivel bloquear um aula ATENDIDO.'))
+
+        self.situacao = self.BLOQUEADO
+        self.save()
+
+    def desbloquear_aula(self):
+        if self.situacao == self.ATENDIDO:
+            raise AgendamentoAtendidoException(
+                _('Não é possivel desbloquear um aula ATENDIDO.'))
+
+        self.situacao = self.ABERTO
+        self.save()
+
+    def reabrir_aula(self):
+        if self.dt_aula.month != timezone.now().month:
+            raise AulaNaoPertenceMesAtualException(
+                'Só é permitido reabrir aulas do mês atual.')
+
+        self.situacao = self.AGENDADO
+        self.save()
+
+    def finalizar_aula(self):
+        self.situacao = Aula.ATENDIDO
+        # if self.dt_aula:
+        #     dt_finalizacao = self.dt_aula.replace(
+        #         hour=timezone.now().hour, minute=timezone.now().minute)
+        # else:
+        #     dt_finalizacao = self.dt_aula.replace(
+        #         hour=timezone.now().hour, minute=timezone.now().minute)
+
+        #     self.dt_aula = dt_finalizacao
+
+        # self.dt_finalizacao = dt_finalizacao
+        self.save()
+
+    # def cancelar_pagamento(self):
+
+    #     if self.situacao == self.BLOQUEADO:
+    #         raise AgendamentoBloqueadoException(
+    #             _('Não é possivel cancelar um aula que esta BLOQUEADO.'))
+
+    #     if self.situacao == self.ATENDIDO:
+    #         raise AgendamentoBloqueadoException(
+    #             _('Não é possivel cancelar um aula que já foi Atendido. Necessário Reabrir'))
+
+    #     self.recebimentos.all().delete()
+    #     self.save()
+
+
+class Grade(models.Model):
+    SEGUNDA = 0
+    TERCA = 1
+    QUARTA = 2
+    QUINTA = 3
+    SEXTA = 4
+    SABADO = 5
+    DOMINGO = 6
+
+    SEMANA_CHOICES = (
+        (SEGUNDA, _('Segunda')),
+        (TERCA, _('Terça')),
+        (QUARTA, _('Quarta')),
+        (QUINTA, _('Quinta')),
+        (SEXTA, _('Sexta')),
+        (SABADO, _('Sábado')),
+        (DOMINGO, _('Domingo'))
+    )
+
+    de = models.DateField(blank=True, null=True)
+    ate = models.DateField(blank=True, null=True)
+
+    dia_semana = MultiSelectField(_('Dia'), choices=SEMANA_CHOICES)
+    inicio = models.TimeField()
+    fim = models.TimeField()
+    intervalo = models.IntegerField(_('Intervalo'), default=0)
+    professor = models.ForeignKey('Professor', on_delete=models.PROTECT, null=True)
+
+    class Meta:
+        ordering = ['dia_semana', ]
+        default_related_name = 'grades'
+
+    def __str__(self):
+        return '%s - %s Até %s' % (self.get_dia_semana_display(), self.inicio, self.fim)
+
+    def gerar_grade(self, dt_inicio, dt_fim):
+        for i in range((dt_fim - dt_inicio).days + 1):
+            data = timezone.make_aware(datetime.combine(dt_inicio + timedelta(days=i), time(0, 0)))
+            if str(data.weekday()) in self.dia_semana:
+                controle_horario = timezone.now().replace(hour=self.inicio.hour, minute=self.inicio.minute)
+                ultimo_horario = timezone.now().replace(hour=self.fim.hour, minute=self.fim.minute)
+
+                while controle_horario < ultimo_horario:
+
+                    if len(Aula.objects.filter(professor=self.professor,
+                                                      dt_aula=data.replace(hour=controle_horario.hour,
+                                                                                  minute=controle_horario.minute))) > 0:
+                        controle_horario = controle_horario + timedelta(minutes=self.intervalo)
+                        continue
+
+                    aula = Aula(
+                        professor=self.professor,
+                        situacao=Aula.ABERTO,
+                        dt_aula=data.replace(hour=controle_horario.hour, minute=controle_horario.minute),
+                        grade=self,
+                    )
+                    aula.save()
+                    controle_horario = controle_horario + timedelta(minutes=self.intervalo)
 
 
     

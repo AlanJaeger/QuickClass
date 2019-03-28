@@ -1,9 +1,10 @@
 from django.forms import ModelForm
-from .models import ProfessoresInteressados, Aulas
+from .models import Aula, Grade
 from django.forms import Form, ModelForm, TextInput, DateField, DateInput, ImageField, FileInput, CharField, IntegerField,Select, TimeInput
 from django.utils.timezone import now
 from django import forms
 from django.contrib.auth.models import User
+
 
 # Formulário de Cadastro de Usuário
 class UserForm(ModelForm):
@@ -23,45 +24,58 @@ class UserForm(ModelForm):
             user.save()
         return user
 
-class InteresseForm(ModelForm):
-    class Meta:
-        model = ProfessoresInteressados
-        fields = ['nome', 'foto', 'disciplina']
-        widgets = {
-            'nome': TextInput(attrs={'class': 'form-control', 'placeholder':'Primeiro Nome'}),
-            'foto': FileInput(attrs={'class':'input'}),
-            'disciplina': Select(attrs={'class': 'form-control', 'placeholder':'Disciplina'})
-        }
+# class ProfessorForm(ModelForm):
+#     class Meta:
+#         model = ProfessoresInteressados
+#         fields = ['nome', 'foto','disciplina']
+#         widgets = {
+#             'nome': TextInput(attrs={'class': 'form-control', 'placeholder':'Primeiro Nome'}),
+#             'foto': FileInput(attrs={'class':'input'}),
+#             'disciplina': TextInput(attrs={'class': 'form-control', 'placeholder':'Disciplina'})
+#         }
     
 
-class ProfessorForm(ModelForm):
-    class Meta:
-        model = ProfessoresInteressados
-        fields = ['nome', 'foto','disciplina']
-        widgets = {
-            'nome': TextInput(attrs={'class': 'form-control', 'placeholder':'Primeiro Nome'}),
-            'foto': FileInput(attrs={'class':'input'}),
-            'disciplina': TextInput(attrs={'class': 'form-control', 'placeholder':'Disciplina'})
-        }
-    
-
-class PedidoForm(ModelForm):
-    class Meta:
-        model = ProfessoresInteressados
-        fields = ['foto']
-        widgets = {
-            'foto': FileInput(attrs={'class':'input'})
-        }
+# class PedidoForm(ModelForm):
+#     class Meta:
+#         model = ProfessoresInteressados
+#         fields = ['foto']
+#         widgets = {
+#             'foto': FileInput(attrs={'class':'input'})
+#         }
 
 
 class AulaForm(ModelForm):
     class Meta:
-        model = Aulas
-        fields = ['dia','horario','duracao','disciplina','conteudo']
-        widgets = {
-            'dia' : TextInput(attrs={'class': 'form-control', 'placeholder':'Dia da aula'}),
-            'horario': TimeInput(attrs={'class':'form-control', 'placeholder':'Horario da aula'}),
-            'duracao': TimeInput(attrs={'class':'form-control', 'placeholder':'Duração da aula'}),
-            'disciplina' : TextInput(attrs={'class': 'form-control', 'placeholder':'Disciplina ministrada na aula'}),
-            'conteudo' : TextInput(attrs={'class': 'form-control', 'placeholder':'Conteudo da aula'})
-        }
+        model = Aula
+        fields = ['dt_aula', 'nome_paciente', 'telefone_paciente']
+        # widgets = {
+        #     'dia' : TextInput(attrs={'class': 'form-control', 'placeholder':'Dia da aula'}),
+        #     'horario': TimeInput(attrs={'class':'form-control', 'placeholder':'Horario da aula'}),
+        #     'duracao': TimeInput(attrs={'class':'form-control', 'placeholder':'Duração da aula'}),
+        #     'disciplina' : TextInput(attrs={'class': 'form-control', 'placeholder':'Disciplina ministrada na aula'}),
+        #     'conteudo' : TextInput(attrs={'class': 'form-control', 'placeholder':'Conteudo da aula'})
+        # }
+
+
+class GradeForm(forms.ModelForm):
+    de = forms.DateField(widget=forms.DateInput(attrs={'class': 'form-control'}))
+    ate = forms.DateField(widget=forms.DateInput(attrs={'class': 'form-control'}))
+    dia_semana = forms.MultipleChoiceField(choices=Grade.SEMANA_CHOICES, widget=forms.SelectMultiple(attrs={
+        'inline': True,
+        'class': 'form-control',
+    }))
+    inicio = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    fim = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    intervalo = forms.CharField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
+
+    def clean(self):
+        de = self.cleaned_data.get('de')
+        ate = self.cleaned_data.get('ate')
+
+        if ate < de:
+            self.add_error('ate', 'Data final deve ser maior q a inicial')
+
+    class Meta:
+        model = Grade
+        fields = ('de', 'ate', 'dia_semana', 'inicio', 'fim', 'intervalo')
+

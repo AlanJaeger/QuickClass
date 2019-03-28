@@ -17,12 +17,20 @@ from django.contrib import admin
 from index.views import *
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import url, include
+import index.urls
 from django.conf.urls import url
-from django.urls import path, include
+from index.views import Cadastro, DashboardProfessor
+from django.contrib.auth.views import (
+    LoginView, LogoutView
+)
+
+
 
 urlpatterns = [
     url(r'^$', DashboardView.as_view(), name='index'),
     url(r'^professor/$', DashboardProfessor.as_view(),name = 'professor') ,
+    url(r'^excluir_grade/$', ExcluirGrade.as_view(),name = 'professor') ,
     url(r'admin/', admin.site.urls),
     url(r'administrador',DashboardAdm.as_view()),
     url(r'pedidos',DashboardPedidos.as_view(), name = 'pedidos'),
@@ -36,7 +44,10 @@ urlpatterns = [
     url(r'^catalogo/$', CatalogoProfessor.as_view(), name='catalogo'),
     url(r'^agenda/$', AgendaProfessor.as_view(), name='agenda'),
     url(r'^cadastrar_aula/$', CadastroAula.as_view(), name='cadastrar_aula'),
-    path('', include('index.urls')),
+    # url(r'^', include(index.urls, namespace='index')),
+    url(r'cadastro/', DashboardProfessor.as_view(),name = 'professor'),
+    url(r'login/', LoginView.as_view(template_name='index/login.html')),
+    url(r'logout/', Cadastro.as_view(), name='cadastro'),
 
         
 ] 

@@ -19,6 +19,9 @@
     <!--CSS Quick Class-->
     <link rel="stylesheet" type="text/css" href="{%static "css/FormProfessor.css"%}">
 
+    <!--Fonts CSS-->
+    <link href="{% static "https://fonts.googleapis.com/css?family=Yantramanav:700"%}" rel="stylesheet">
+    
 </head>
 
 <body>
@@ -31,11 +34,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a class="nav-link" href="/agenda/">Agenda
                           </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item active">
                             <a class="nav-link" href="/professor/">Grade</a>
                         </li>
                         <li class="nav-item">
@@ -43,6 +46,7 @@
                         </li>
                     </ul>
                 </div>
+            
         </div>
     </nav>
     <!--Navbar-->
@@ -52,128 +56,123 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card card-style">
-                    <div class="row">
-                            <div class="col-md-3">
-                                <div class="card border-secondary mt-5 mb-5 ml-5" >
-                                    <div class="card-header">Calendário</div>
-                                    <div class="card-body text-secondary">
-                                        <div class="center">
-                                            <div id="data_agendamento"  class="calendar"></div>
-                                        </div>
-                                    </div>
-                                </div>                            
-                            </div>
-                        
-                        <div class="col-md-8">
-                                <!-- <div class="card card-style"> -->
-                                        <div class="card border-secondary mt-5 mb-5 ml-5" >
-                                            <div class="card-header">Você é importante para nós</div>
-                                                <div class="card-body text-secondary">
-                            <table class="table table-condensed table-hover">
+                    <div class="card border-secondary mt-5 mb-5 ml-5" >
+                        <div class="card-header">Grade de Horários</div>
+                        <div class="card-body text-secondary">
+                            <table class="table table-condensed">
                                 <thead>
                                 <tr>
-                                    <th class="col-md-1">Hora</th>
-                                    <th></th>
-                                    <th class="col-md-3">Aluno</th>
-                                    <th class="col-md-2">Email</th>
-                                    <th class="col-md-3">Celular</th>
+                                    <th class="col-md-1">De</th>
+                                    <th class="col-md-1">Até</th>
+                                    <th class="col-md-1">Dia da Semana</th>
+                                    <th class="col-md-1">Inicio</th>
+                                    <th class="col-md-1">Fim</th>
+                                    <th class="col-md-1">Intervalo</th>
+                                    <th class="col-md-1"></th>
+                                    
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    {% for aula in aulas %}
-                                    <tr>
-                                        <td>{{aula.dt_aula|time}}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    {% endfor %}
+                                        <form class="form" method="post" action="/professor/">
+                                                {% csrf_token %}
+                                        
+                                        <tr class="item-formset">                                                        
+                                            
+                                            <td>{{  frm.de }}</td>
+                                            <td>{{ frm.ate }}</td>
+                                            <td>{{  frm.dia_semana  }}</td>
+                                            <td>{{  frm.inicio  }}</td>
+                                            <td>{{  frm.fim }}</td>
+                                            <td>{{  frm.intervalo  }}</td>
+                                            <td><a href="/excluir_grade/" title="Excluir" class="btn btn-danger">X</a></td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <button type="submit" class="btn btn-primary">Salvar</button>
+                                            </td>
+
+                                        </tr>
+                                    
+                                    </form>
                                 </tbody>
                             </table>
-                            </div>
-                            </div>
-                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--Card Form-->
+                        
 
     <!--Footer-->
-    <!-- <footer class="page-footer font-medium unique-color-dark pt-0" style="max-width: 100%;background-color: #1e1e1e;">
+    <footer class="page-footer font-medium unique-color-dark pt-0" style="max-width: 100%;background-color: #1e1e1e;">
 
         <div>
             <div class="container">
+                <!--Grid row-->
                 <div class="row py-4 d-flex align-items-center" style="margin-bottom: -32px">
+
+                    <!--Grid column-->
                     <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
                         <h5 class="mb-0">Nós também estamos nas redes sociais!</h5>
                     </div>
-                   
+                    <!--Grid column-->
+
+                    <!--Grid column-->
                     <div class="col-md-6 col-lg-7 text-center text-md-right">
+                        <!--Facebook-->
                         <a class="edit-text" style="text-decoration: none;" href="https://www.facebook.com/agilsistemas.net/">
                             <i class="fa fa-facebook mr-lg-4"> </i>
                         </a>
+                        <!--Linkedin-->
                         <a class="edit-text" style="text-decoration: none;" href="https://www.linkedin.com/company/agilsistemasweb/">
                             <i class="fa fa-linkedin mr-lg-4"> </i>
                         </a>
+                        <!--Instagram-->
                         <a class="edit-text" style="text-decoration: none;" href="https://www.instagram.com/agil_sistemas/">
                             <i class="fa fa-instagram mr-lg-4"> </i>
                         </a>
                     </div>
+                    <!--Grid column-->
 
                 </div>
+                <!--Grid row-->
             </div>
-        </div> -->
+        </div>
 
-        <!-- <div class="container mt-5 mb-4 text-center text-md-left">
+        <!--Footer Links-->
+        <div class="container mt-5 mb-4 text-center text-md-left">
                 <div class="row mt-3">
+    
+                    <!--First column-->
                     <div class="col-md-3 col-lg-4 col-xl-3 mb-4">
-                        <h6 class="text-uppercase font-weight-bold"> -->
+                        <h6 class="text-uppercase font-weight-bold">
                             <!-- <strong>Agil sistemas</strong> -->
-                        <!-- </h6>
+                        </h6>
                         <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width:60px; color:white;">
                         <p style="margin-top:-39px">Somos uma empresa que desenvolve tecnologia para a área de educação e desenvolvimento humano, oferecendo soluções inovadoras e customizadas.</p>
-                    </div> -->
+                    </div>
                     <!--/.First column-->
     
-                    <!--Second column-->
-                    <!-- <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <h6 class="text-uppercase font-weight-bold">
-                            <strong>Produtos</strong>
-                        </h6>
-                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                        <p>
-                            <img class="img-responsive img-logo2" src="{% static "img/saga-logo.png" %}">
-                        </p>
-                        <p>
-                            <img class="img-responsive img-logo2" src="{% static "img/Ativo 9-8.png" %}">
-                        </p>
-                        <p>
-                            <img class="img-responsive img-logo2" src="{% static "img/exodo.png" %}">
-                        </p>
-                    </div> -->
-                    <!--/.Second column-->
     
                     <!--Third column-->
-                    <!-- <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                         <h6 class="text-uppercase font-weight-bold">
                             <strong>Links Úteis</strong>
                         </h6>
                         <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto edit-text" style="width: 60px;">
-                        <p> -->
-                            <!-- <a class="edit-text" style="text-decoration: none;" href="/professor">Trabalhe Conosco</a> -->
-                        <!-- </p>
+                        <p>
+                                <a class="edit-text" style="text-decoration: none;" href="/equipe">Quem Somos</a>
+                            </p>
                         <p>
                             <a class="edit-text" style="text-decoration: none;" href="#!">Ajuda</a>
                         </p>
-                    </div> -->
+                    </div>
                     <!--/.Third column-->
     
                     <!--Fourth column-->
-                    <!-- <div class="col-md-4 col-lg-3 col-xl-3">
+                    <div class="col-md-4 col-lg-3 col-xl-3">
                         <h6 class="text-uppercase font-weight-bold">
                             <strong>Contato</strong>
                         </h6>
@@ -184,7 +183,7 @@
                             <i class="fa fa-envelope mr-3"></i><a class="edit-text" style="text-decoration: none;" href="mailto:suporte@agilsistemas.net.br">suporte@agilsistemas.net.br</a></p>
                         <p>
                             <i class="fa fa-phone mr-3"></i>(84) 2226-8230</p>
-                    </div> -->
+                    </div>
                     <!--/.Fourth column-->
     
                 </div>
@@ -192,38 +191,43 @@
             <!--/.Footer Links-->
 
         <!-- Copyright-->
-        <!-- <div class="footer-copyright py-3 text-center" style="margin-top: -50px">
+        <div class="footer-copyright py-3 text-center" style="margin-top: -50px">
             © 2018 Copyright:
             <a class="edit-text" style="text-decoration: none;" href="https://mdbootstrap.com/material-design-for-bootstrap/">
                 <strong> agilsistemas.net.br</strong>
             </a>
-        </div> -->
+        </div>
         <!--/.Copyright -->
 
-    <!-- </footer> -->
+    </footer>
     <!--/.Footer-->
 </body>
 
 </html>
 
 <!--JS e JQ do Bootstrap-->
-<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script> -->
 
 <!--JS do Quick-->
 <script type="text/javascript" src="{%static "js/professor.js"%}"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+<script>
+ $(function() {
+    $( "#id_de" ).datepicker({
+        //  dateFormat: 'yy-mm-dd' 
+      // You can put more options here.
 
-<script>    
-    $(function() {
-        $('#data_agendamento').datepicker({
-                uiLibrary: 'bootstrap4',
-            }).on('changeDate', function (e) {
-                location.href = '{% url 'agenda'  %}' + '?dia='+ e.format('dd-mm-yyyy');
-            }).datepicker('update', '{{ dia|date:'d-m-Y' }}');  
     });
-</script>
+    $( "#id_ate" ).datepicker({
+        //  dateFormat: 'yy-mm-dd' 
+      // You can put more options here.
+
+    });
+  });
+  </script>
