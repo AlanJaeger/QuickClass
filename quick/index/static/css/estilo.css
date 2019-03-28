@@ -523,6 +523,10 @@ p.description{
     display: none;
 }
 
+.fontBotao{
+    font-size: 15px;
+}
+
 .desktop{
     display: block
 }

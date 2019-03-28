@@ -17,8 +17,8 @@ from django.contrib import admin
 from index.views import *
 from django.conf import settings
 from django.conf.urls.static import static
-from django.conf.urls import url
-from django.urls import path, include
+from django.conf.urls import url, include
+import index.urls
 
 urlpatterns = [
     url(r'^$', DashboardView.as_view(), name='index'),
@@ -36,7 +36,8 @@ urlpatterns = [
     url(r'^catalogo/$', CatalogoProfessor.as_view(), name='catalogo'),
     url(r'^agenda/$', AgendaProfessor.as_view(), name='agenda'),
     url(r'^cadastrar_aula/$', CadastroAula.as_view(), name='cadastrar_aula'),
-    path('', include('index.urls')),
+    # path('', include('index.urls')),
+    # url(r'^', include(index.urls, namespace='index')),
 
         
 ] 
