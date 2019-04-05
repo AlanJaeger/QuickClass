@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+    <form  action="{% url 'aula' id_aula=aula.pk %} " method="POST" class="form">
+            {% csrf_token %}
+            {%if aula.curso == True%} 
+            <div class="background-image">
+                
+                    
+                    <form  action="{% url 'aula' id_aula=aula.pk %} " method="POST" class="form">
+                            {% csrf_token %}
+                          <style>
+                            .btn-outline-danger {
+                    color: #dc3545;
+                    background-color: transparent;
+                    background-image: none;
+                    border-color: #dc3545;
+                
+                }
+                .signin-button:hover{
+                    background-color: #fe1043;
+                    color: white;
+                }
+                          </style>
+                              <link rel="stylesheet" type="text/css" href="{% static "css/estiloVenda.css" %}">
+                              
+                
+                            <div class="section">
+                                <div class="container">
+                                    <div class="row" style="margin-top:200px">
+                                        
+                                          <div class="col-md-6">
+                                              <div class="col-md-6">
+                                                  <img src="{%static "img/aluno_curso.png"%}" style="width: 400px;
+                                                  margin-left: 53px;
+                                                  margin-top: -72px;">
+                                                  
+                                              </div>
+                                          </div>
+                                          
+                                      
+                                          <h1>
+                                            conteudo do curso<br>
+                                            <p>
+                                              Neste curso você verá:
+                                            </p>
+                                           <p>
+                                              {{aula.conteudo}}
+                                             </p> 
+                                          </h1>
+                                       
+                                          <div class="row">
+                                            <div class="col-md-3">
+                                              <label for="inputEmail4">Nome</label>
+                                              <input type="text" class="form-control" id="inputName"  value="" name="nome" placeholder="Seu Nome">
+                                            </div>
+                                            <div class="col-md-3">
+                                              <label for="inputPassword4">Email</label>
+                                              <input type="email" class="form-control" id="inputEmail" value=""  name="email" placeholder="Seu Email">
+                                            </div>
+                                          
+                                          <div class="col-md-6" style="margin-left:-16px; float:right">
+                                            <!-- <label for="inputAddress">Assunto</label> -->
+                                            <!-- <input type="text" class="form-control" id="inputAssunto" name ="assunto" placeholder="O assunto da aula"> -->
+                                            <input type="hidden"  value="{{aula.pk}}" name="id_aula"/>   
+                                            <button type="submit" method="POST" class="btn btn-block btn-outline-danger signin-button">Inscreva-se no Curso</button>                                        
+                                          </div>
+                                          </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+
+            {%endif%}
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {%if aula.curso == False%}
+    <div class="background-image">
+
+    
+    <form  action="{% url 'aula' id_aula=aula.pk %} " method="POST" class="form">
+            {% csrf_token %}
+          <style>
+            .btn-outline-danger {
+    color: #dc3545;
+    background-color: transparent;
+    background-image: none;
+    border-color: #dc3545;
+
+}
+.signin-button:hover{
+    background-color: #fe1043;
+    color: white;
+}
+          </style>
+              <link rel="stylesheet" type="text/css" href="{% static "css/estiloVenda.css" %}">
+              
+
+            <div class="section">
+                <div class="container">
+                    <div class="row" style="margin-top:112px">
+                        
+                          <div class="col-md-6">
+                              <img src="{%static "img/aluno.png"%}" style="width: 57%;
+                              margin-left: 53px;
+                              margin-top: -72px;">
+                              
+                          </div>
+                          <h1 style="font-size:2.8em">
+                              Prencha o formulário abaixo<br>
+                              <p>
+                                E confirme a compra da sua aula
+                              </p>
+                            </h1>
+                        
+
+                          <div class="row">
+                            <div class="col-md-3">
+                              <label for="inputEmail4">Nome</label>
+                              <input type="text" class="form-control" id="inputName"  value="" name="nome" placeholder="Seu Nome">
+                            </div>
+                            <div class="col-md-3">
+                              <label for="inputPassword4">Email</label>
+                              <input type="email" class="form-control" id="inputEmail" value=""  name="email" placeholder="Seu Email">
+                            </div>
+                          
+                          <div class="col-md-6" style="margin-left:-16px; float:right">
+                            <label for="inputAddress">Assunto</label>
+                            <input type="text" class="form-control" id="inputAssunto" name ="assunto" placeholder="O assunto da aula">
+                            <input type="hidden"  value="{{aula.pk}}" name="id_aula"/>   
+                            <button type="submit" method="POST" class="btn btn-block btn-outline-danger signin-button">Compre Sua Aula</button>                                        
+                          </div>
+                          </div>
+                       
+                    </div>
+                </div>
+            </div>
+          </div>
+            {%endif%}
+
+            {% endblock %}
+ 
+
+
+    

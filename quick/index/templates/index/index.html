@@ -430,72 +430,16 @@
 
     <section class="center slider" >
         <div class="carousel">
-                
+                {% for professor in professor %}
             <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{% static "img/dayvison.png"%}" alt="Card image cap" style="height:100%">
+                <img class="card-img-top" src= '{{professor.foto.url}}' alt="Card image cap" style="height:100%">
                 <div class="card-body">
-                    <h5 class="card-title" style="color:black">Dayvison Ananias</h5>
-                    <p class="card-text" style="color:black"> Pedagogo e Especialista em Educação Especial Inclusiva.</p>
-                    <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#modalDayvison">
-                            Saiba Mais
-                          </button>
-                </div>
+                    <h5 class="card-title" style="color:black">{{professor.nome}}</h5>
+                    <p class="card-text" style="color:black"> {{professor.descricao}}</p>
+                    <a href="{% url 'catalogo' id_professor=professor.pk %} " class="btn btn-block btn-outline-danger">Acesse o Portfólio do professor</a>                    
+                </div>    
             </div>
-
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{% static "img/sthephany.png"%}" alt="Card image cap" style="height:100%">
-                <div class="card-body">
-                    <h5 class="card-title" style="color:black">Sthéphanye Revoredo</h5>
-                    <p class="card-text" style="color:black">Nascida em Natal, biologa e mestre em Biotecnologia.</p>
-                    <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#modalSthephany">
-                        Saiba Mais
-                      </button>
-                </div>
-            </div>
-
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{% static "img/carlos.png"%}" alt="Card image cap" style="height:100%">
-                <div class="card-body">
-                    <h5 class="card-title" style="color:black">Carlos Planas</h5>
-                    <p class="card-text" style="color:black">Prof° Carlos Planas, nascido na cidade de Secaucus.</p>
-                    <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#modalPlanas">
-                        Saiba Mais
-                      </button>
-                </div>
-            </div>
-
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{% static "img/Juliana.png"%}" alt="Card image cap" style="height:100%">
-                <div class="card-body">
-                    <h5 class="card-title" style="color:black">Juliana Teixeira Dornelos</h5>
-                    <p class="card-text" style="color:black">Professora de matemática formada pela UFRN.</p>
-                    <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#modalJuliana">
-                        Saiba Mais
-                      </button>
-                </div>
-            </div>
-
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{% static "img/maricildo.png"%}" alt="Card image cap" style="height:100%">
-                <div class="card-body">
-                    <h5 class="card-title" style="color:black">Miracildo Quintino</h5>
-                    <p class="card-text" style="color:black">Prof° Miracildo Quintino é formado em licenciatura plena</p>
-                   <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#modalMiracildo">
-                    Saiba Mais
-                  </button>
-                </div>
-            </div>
-
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{% static "img/hamilton.jpg"%}" alt="Card image cap" style="height:100%">
-                <div class="card-body">
-                    <h5 class="card-title" style="color:black">Hamilton Oliveira</h5>
-                    <p class="card-text" style="color:black">Especialista em ensino da matemática pela UFRN.</p>
-                    <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#modalHamilton">
-                        Saiba Mais
-                      </button>
-                </div>
-            </div>
+            {%endfor%}
         </div>
     </section>
 

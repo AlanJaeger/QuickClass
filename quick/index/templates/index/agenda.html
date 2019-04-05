@@ -63,6 +63,34 @@
                                     </div>
                                 </div>                            
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card card-style">
+                                        <p class="card-text card-text-edit"></p>
+                                        <section class="center slider">
+                                            <div class="carousel2">
+                                                    {% for aula in aulas %} 
+                                                    <div class="card" style="width: 18rem;">
+                                                            <img class="card-img-top img-fluid"src="{% static "img/CarlosMoura.jpg"%}" alt="Card image cap">
+                                                    <div class="card-body">
+                                                        
+                                                        <h5 class="card-title" style="color:black">{{aula.dt_aula|time}}</h5>
+                                                        <p class="card-text"></p>
+                                                       
+                                                        <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#ExemploModalCentralizado">
+                                                                Comprar
+                                                              </button>
+                
+                                                    </div>
+                                                </div>
+                                            {%endfor%}
+                                            </div>
+                                        </section>   
+                                       
+                                    </div>
+                                </div>
+                        </div>
                         
                         <div class="col-md-8">
                                 <!-- <div class="card card-style"> -->
@@ -73,20 +101,16 @@
                                 <thead>
                                 <tr>
                                     <th class="col-md-1">Hora</th>
-                                    <th></th>
                                     <th class="col-md-3">Aluno</th>
                                     <th class="col-md-2">Email</th>
-                                    <th class="col-md-3">Celular</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     {% for aula in aulas %}
                                     <tr>
-                                        <td>{{aula.dt_aula|time}}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{{aula.dt_aula|time|default:''}}</td>
+                                        <td>{{ aula.nome_aluno|default:'' }}</td>
+                                        <td>{{ aula.email|default:''}}</td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>

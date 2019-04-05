@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import datetime
 from django.views import View
-from index.models import Professor, Aula, Grade
-from .forms import AulaForm, UserForm, GradeForm
+from index.models import Professor, Aula, Grade, Oferta
+from .forms import AulaForm, UserForm, GradeForm, OfertaForm
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
 from django.views.generic import CreateView, UpdateView
@@ -15,7 +15,9 @@ from django.utils import timezone
 class DashboardView(View):
 
     def get(self, request):        
-        return render(request,'index/index.html')
+        professor = Professor.objects.all()
+        
+        return render(request,'index/index.html',{'professor': professor})
 
     # def professor(request):
         # return render(request,'index/professor.html')from
@@ -75,7 +77,7 @@ class DashboardAdm(View):
 
 class DashboardPedidos(View):
     def get(self, request):
-        pedidos = ProfessoresInteressados.objects.all()
+        pedidos = Professor.objects.all()
         return render(request,'index/pedidos.html', {'pedidos': pedidos})
 
 class DashboardAula(View):
@@ -156,8 +158,23 @@ class QuemSomos(View):
         return render(request, 'index/quemsomos.html')
         
 class CatalogoProfessor(View):
-    def get(self, request):
-        return render(request, 'index/catalogoProfessor.html')
+     def get(self, request, id_professor):
+        professor = Professor.objects.get(pk=id_professor)   
+        
+        if request.GET.get('dia') == None:
+            dia = datetime.datetime.now().strftime("%d-%m-%Y")
+        else:
+            dia = request.GET.get('dia')
+
+        dia = timezone.make_aware(datetime.datetime.strptime(dia, '%d-%m-%Y'))
+        aulas = Aula.objects.filter(professor=professor, disponivel=True)
+        ctx = {
+            'aulas': aulas,
+            'professor': professor
+        }
+
+        return render(request,'index/catalogoProfessor.html', ctx)
+
 
 class CadastroAula(View):
     def post(self, request):
@@ -171,6 +188,22 @@ class CadastroAula(View):
 
 
         print(aula.titulo)
+class ComprarAula(View):
+      def get(self, request, id_aula):
+          aula = Aula.objects.get(pk=id_aula) 
+          
+          return render(request,'index/compra.html',{'aula': aula})
+
+
+      def post(self, request, id_aula):
+        aula = Aula.objects.get(pk=id_aula) 
+        aula.nome_aluno = request.POST.get('nome')
+        aula.email = request.POST.get('email')
+        aula.assunto = request.POST.get('assunto')
+        aula.disponivel = False
+        aula.save()
+        return redirect('catalogo', id_professor=aula.professor.pk)
+    
 
 class AgendaProfessor(View):
     def get(self, request):
@@ -198,4 +231,18 @@ class AgendaProfessor(View):
             print(form.errors)
 
         return render(request,'index/agenda.html',{'form': form})
+
+
+class Oferta(View):
+    def get(self, request):
+        form = OfertaForm()
+        return render(request,'index/oferta.html', {'form': form})
+
+    def post(self, request):
+       form = OfertaForm()
+       if form.is_valid():
+           form.save()
+       return render(request,'index/oferta.html',{'form': form})
+
+
 

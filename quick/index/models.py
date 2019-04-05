@@ -8,6 +8,11 @@ from multiselectfield import MultiSelectField
 
 # Create your models here.
 
+class Oferta(models.Model):
+    aula = models.ForeignKey('Aula', on_delete=models.PROTECT)
+    preco = models.CharField(max_length = 10, blank = True)
+    conteudo = models.CharField(max_length = 300, blank = True)
+
 class Disciplina(models.Model):
     nome = models.TextField()
     aprovacao = models.BooleanField(default=False)
@@ -27,6 +32,8 @@ class Professor(models.Model):
     sobrenome = models.CharField(max_length = 80)
     cep = models.CharField(max_length=9, blank=True, null=True)
     foto = models.FileField(upload_to='media/', blank=True, null=True)
+    fotocatalogo = models.FileField(upload_to='media/', blank=True, null=True)
+    descricao = models.CharField(max_length = 56, blank=True)
     disciplina = models.ForeignKey('Disciplina', on_delete=models.PROTECT)
 
     def __str__(self):
@@ -45,12 +52,19 @@ class Aula(models.Model):
         (ATENDIDO, _('Atendido')),
     )
 
-    dt_aula = models.DateTimeField(_('Data Aula'), null=True)
+    dt_aula = models.DateTimeField(_('Data Aula'), null=True, blank=True)
     situacao = models.IntegerField(_('Situação'), choices=SITUACAO_CHOICES, default=ABERTO)
     professor = models.ForeignKey(Professor, on_delete= models.PROTECT, null = True)
     grade = models.ForeignKey('Grade', null=True, blank=True, on_delete = models.SET_NULL)
     nome_paciente =  models.CharField(_('Nome'), max_length=80)
     telefone_paciente = models.CharField(verbose_name='Telefone', max_length=20, blank=True, null=True)
+    disponivel = models.BooleanField(default=True)
+    assunto = models.CharField(max_length=300, blank= True, null=True)
+    email = models.CharField(max_length = 100, blank= True, null = True)
+    nome_aluno = models.CharField(max_length = 80, blank=True, null=True)
+    curso = models.BooleanField(default = False)
+    conteudo = models.CharField(max_length=700,blank=True, null =True)
+    disponivel_curso = models.BooleanField(default=True)
 
     # AgendamentoBloqueadoException = AgendamentoBloqueadoException
     # AgendamentoAtendidoException = AgendamentoAtendidoException
@@ -131,6 +145,9 @@ class Aula(models.Model):
 
     #     self.recebimentos.all().delete()
     #     self.save()
+
+    def __str__(self):
+        return self.nome_paciente
 
 
 class Grade(models.Model):

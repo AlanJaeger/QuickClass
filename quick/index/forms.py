@@ -1,6 +1,6 @@
 from django.forms import ModelForm
-from .models import Aula, Grade
-from django.forms import Form, ModelForm, TextInput, DateField, DateInput, ImageField, FileInput, CharField, IntegerField,Select, TimeInput
+from .models import Aula, Grade, Oferta
+from django.forms import Form, ModelForm, ModelChoiceField, TextInput, DateField, DateInput, ImageField, FileInput, CharField, IntegerField,Select, TimeInput
 from django.utils.timezone import now
 from django import forms
 from django.contrib.auth.models import User
@@ -47,14 +47,12 @@ class UserForm(ModelForm):
 class AulaForm(ModelForm):
     class Meta:
         model = Aula
-        fields = ['dt_aula', 'nome_paciente', 'telefone_paciente']
-        # widgets = {
-        #     'dia' : TextInput(attrs={'class': 'form-control', 'placeholder':'Dia da aula'}),
-        #     'horario': TimeInput(attrs={'class':'form-control', 'placeholder':'Horario da aula'}),
-        #     'duracao': TimeInput(attrs={'class':'form-control', 'placeholder':'Duração da aula'}),
-        #     'disciplina' : TextInput(attrs={'class': 'form-control', 'placeholder':'Disciplina ministrada na aula'}),
-        #     'conteudo' : TextInput(attrs={'class': 'form-control', 'placeholder':'Conteudo da aula'})
-        # }
+        fields = ['dt_aula', 'nome_paciente', 'telefone_paciente', 'assunto', 'email', 'nome_aluno']
+        widgets = {
+            'email': TextInput(attrs={'class':'form-control', 'placeholder':'Digite seu email'}),
+            'nome_paciente' : TextInput(attrs={'class':'form-control', 'placeholder':'Digite seu nome'}),
+            'assunto' : TextInput(attrs={'class':'form-control', 'placeholder':'Digite o assunto que você quer estudar'})
+        }
 
 
 class GradeForm(forms.ModelForm):
@@ -78,4 +76,9 @@ class GradeForm(forms.ModelForm):
     class Meta:
         model = Grade
         fields = ('de', 'ate', 'dia_semana', 'inicio', 'fim', 'intervalo')
+
+class OfertaForm(forms.Form):
+    conteudo = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    preco = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    oferta = forms.ModelChoiceField(queryset=Aula.objects.all())
 

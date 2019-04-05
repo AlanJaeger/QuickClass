@@ -1,0 +1,7 @@
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.oferta }}
+    {{ form.preco }}    
+    {{form.conteudo}}
+    <input type="submit" value="Submit" />
+</form>
