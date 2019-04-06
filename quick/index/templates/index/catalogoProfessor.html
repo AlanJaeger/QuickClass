@@ -88,7 +88,7 @@
                                 <thead>
                                         <tr class="row">
                                             <th class="col-md-4">Hora</th>
-                                            <th class="col-md-4">Dia</th>
+                                            <th class="col-md-4">Duração</th>
                                             <th class="col-md-4">Comprar</th>
                                         </tr>
                                         </thead>
@@ -103,7 +103,7 @@
                                             {% now "Y-m-d" as todays_date %}
                                             {% if todays_date <= aula.dt_aula|date:"Y-m-d" %}
                                                 <tr>
-                                                    <td>{{aula.dt_aula|time}}</td>
+                                                    <td>{{aula.grade}}</td>
                                                     <td>{{aula.dt_aula|date}}</td>
                                                     <td><a href="/compra/{{aula.pk}}" class="btn btn-outline-danger compre">compre</a></td>
                                                     <td></td>
