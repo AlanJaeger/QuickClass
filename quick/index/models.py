@@ -33,7 +33,8 @@ class Professor(models.Model):
     cep = models.CharField(max_length=9, blank=True, null=True)
     foto = models.FileField(upload_to='media/', blank=True, null=True)
     fotocatalogo = models.FileField(upload_to='media/', blank=True, null=True)
-    descricao = models.CharField(max_length = 56, blank=True)
+    descricao = models.CharField(max_length = 10000, blank=True)
+    descricaocurta = models.CharField(max_length = 56, blank = True)
     disciplina = models.ForeignKey('Disciplina', on_delete=models.PROTECT)
 
     def __str__(self):
