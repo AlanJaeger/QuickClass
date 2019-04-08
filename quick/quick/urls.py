@@ -26,7 +26,6 @@ from django.contrib.auth.views import (
 )
 
 
-
 urlpatterns = [
     url(r'^$', DashboardView.as_view(), name='index'),
     url(r'^professor/$', DashboardProfessor.as_view(),name = 'professor') ,
@@ -44,11 +43,11 @@ urlpatterns = [
     url(r'^catalogo/(?P<id_professor>\d+)$', CatalogoProfessor.as_view(), name='catalogo'),
     url(r'^agenda/$', AgendaProfessor.as_view(), name='agenda'),
     url(r'^cadastrar_aula/$', CadastroAula.as_view(), name='cadastrar_aula'),
-    # url(r'^', include(index.urls, namespace='index')),
-    url(r'cadastro/', DashboardProfessor.as_view(),name = 'professor'),
     url(r'login/', LoginView.as_view(template_name='index/login.html')),
     url(r'logout/', Cadastro.as_view(), name='cadastro'),
     url(r'oferta', Oferta.as_view(), name='oferta'),
     url(r'compra/(?P<id_aula>\d+)', ComprarAula.as_view(), name='aula'),
+    # path('', include('index.urls')),
+    #url(r'^', include(index.urls, namespace='index')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
