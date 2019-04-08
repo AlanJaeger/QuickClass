@@ -51,10 +51,13 @@
             <div class="col-md-2" style=" max-width:159px; margin-left:115px;">
                  <a class="signin-button text-signin" style="text-decoration:none;" href=/logout/>Sair</a> 
             </div>
+           
             {% else %}
             <div class="col-md-2" style=" max-width:156px; margin-left:115px;">
                 <a class="signin-button tyext-signin" style="text-decoration:none;" href=/login/>Iniciar Sessão</a> 
            </div>
+           
+           
            {% endif %}
            {% if not user.is_authenticated %}
             <div class="col-md-2" style=" max-width:144px;">
@@ -62,8 +65,10 @@
            </div>
            {% endif %}
            <div class="col-md-2">
-                <a class="signin-button text-signin" style="text-decoration:none;" href=/professor/>Torne-se um professor</a> 
+                <a class="signin-button text-signin" style="text-decoration:none;" href=/equipe/>Quem Somos</a> 
            </div>
+           
+           
         </div>
         <div class="row">
             <div class="col text-space pitch">
@@ -607,15 +612,12 @@
                     <!--Grid column-->
                     <div class="col-md-6 col-lg-7 text-center text-md-right">
                         <!--Facebook-->
-                        <a class="edit-text" style="text-decoration: none;" href="https://www.facebook.com/agilsistemas.net/">
+                        <a class="edit-text" style="text-decoration: none;" href="https://www.facebook.com/QuickClass_Oficial-391757358268751/">
                             <i class="fab fa-facebook-f mr-lg-4"></i>
                         </a>
-                        <!--Linkedin-->
-                        <a class="edit-text" style="text-decoration: none;" href="https://www.linkedin.com/company/agilsistemasweb/">
-                            <i class="fab fa-linkedin-in mr-lg-4"></i>
-                        </a>
+                       
                         <!--Instagram-->
-                        <a class="edit-text" style="text-decoration: none;" href="https://www.instagram.com/agil_sistemas/">
+                        <a class="edit-text" style="text-decoration: none;" href="https://www.instagram.com/quickclass_oficial/?hl=pt-br">
                             <i class="fab fa-instagram mr-lg-4"></i>
                         </a>
                     </div>
@@ -684,9 +686,9 @@
                     </h6>
                     <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                     <p>
-                        <i class="fa fa-home mr-3"></i> contato@quickclass.net.br</p>
+                        <i class="fa fa-home mr-3"></i> contato@quick-class.com</p>
                     <p>
-                        <i class="fa fa-envelope mr-3"></i><a class="edit-text" style="text-decoration: none;" href="mailto:suporte@quickclass.net.br">suporte@quickclass.net.br</a></p>
+                        <i class="fa fa-envelope mr-3"></i><a class="edit-text" style="text-decoration: none; margin-left:6px;" href="mailto:suporte@quickclass.net.br">suporte@quick-class.com</a></p>
                     <p>
                         <!-- <i class="fa fa-phone mr-3"></i>(84) 2226-8230</p> -->
                 </div>
@@ -699,8 +701,8 @@
         <!-- Copyright-->
         <div class="footer-copyright py-3 text-center" style="margin-top: -50px">
             © 2018 Copyright:
-            <a class="edit-text" style="text-decoration: none;" href="https://mdbootstrap.com/material-design-for-bootstrap/">
-                <strong> agilsistemas.net.br</strong>
+            <a class="edit-text" style="text-decoration: none;" href="http://quick-class.com/">
+                <strong>Quick Class</strong>
             </a>
         </div>
         <!--/.Copyright -->

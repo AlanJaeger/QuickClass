@@ -33,7 +33,7 @@ body {
 .overlay {
     position: fixed;
     bottom: 0;
-    background: rgba(185, 30, 56, 0.301);
+    background: rgba(185, 30, 58, 0.69);
     height: 100%;
     width: 100%;
 }

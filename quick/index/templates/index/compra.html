@@ -3,7 +3,7 @@
 {% load staticfiles %}
 
 {% block content %}
-    <form  action="{% url 'aula' id_aula=aula.pk %} " method="POST" class="form">
+    <form  action="{% url 'aula' id_aula=aula.pk %} " name="dados" method="POST" class="form">
             {% csrf_token %}
             {%if aula.curso == True%} 
             <div class="background-image">
@@ -120,7 +120,7 @@
     <div class="background-image">
 
     
-    <form  action="{% url 'aula' id_aula=aula.pk %} " method="POST" class="form">
+    <form  action="{% url 'aula' id_aula=aula.pk %} " name="dados" method="POST" class="form">
             {% csrf_token %}
           <style>
             .btn-outline-danger {
@@ -159,18 +159,19 @@
                           <div class="row">
                             <div class="col-md-3">
                               <label for="inputEmail4">Nome</label>
-                              <input type="text" class="form-control" id="inputName"  value="" name="nome" placeholder="Seu Nome">
+                              <input type="text" class="form-control" id="inputName"  value="" name="nome" placeholder="Seu Nome" required>
                             </div>
                             <div class="col-md-3">
                               <label for="inputPassword4">Email</label>
-                              <input type="email" class="form-control" id="inputEmail" value=""  name="email" placeholder="Seu Email">
+                              <input type="email" class="form-control" id="inputEmail" value="" name="email" placeholder="Seu Email" required>
                             </div>
+                            
                           
                           <div class="col-md-6" style="margin-left:-16px; float:right">
                             <label for="inputAddress">Insira aqui o assunto que deseja estudar</label>
-                            <input type="text" class="form-control" id="inputAssunto" name ="assunto" placeholder="O assunto da aula">
-                            <input type="hidden"  value="{{aula.pk}}" name="id_aula"/>   
-                            <button type="submit" method="POST" class="btn btn-block btn-outline-danger signin-button">Compre Sua Aula</button>                                        
+                            <input type="text" class="form-control" id="inputAssunto" name ="assunto" placeholder="O assunto da aula" required>
+                            <input type="hidden"  value="{{aula.pk}}" id="inputPK" name="id_aula"/>   
+                            <button type="submit" method="POST"  onclick="funcao1()" class="btn btn-block btn-outline-danger signin-button">Compre Sua Aula</button>                                        
                           </div>
                           </div>
                        
@@ -178,6 +179,17 @@
                 </div>
             </div>
           </div>
+          <script>
+            function funcao1(){
+              if(!document.dados.inputName.value=="" & !document.dados.inputEmail.value=="" & !document.dados.inputAssunto.value==""){
+                alert( "Parabéns pela compra! Dentro de instantes você recebera um e-mail de confirmação da sua aula." );
+                document.dados.inputName.focus();
+                return false;
+              }
+              return true;
+            }  
+          </script>
+
             {%endif%}
 
             {% endblock %}
@@ -185,3 +197,51 @@
 
 
     
+
+<!-- 
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Validação de formulários - DevMedia Tutorial</title>
+                 
+                 
+            </head>
+            <body>
+             
+            <form action="pagina de ação" method="post" name="dados" onSubmit="return enviardados();" >
+              <table width="588" border="0" align="center" >
+                <tr>
+                  <td width="118"><font size="1" face="Verdana, Arial, Helvetica, sans-serif">Nome completo:</font></td>
+                  <td width="460">
+                    <input name="tx_nome" type="text" class="formbutton" id="tx_nome" size="52" maxlength="150">
+                  </td>
+                </tr>
+                <tr>
+                  <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif">E-mail:</font></td>
+                  <td><font size="2">
+                    <input name="tx_email" type="text" id="tx_email" size="52" maxlength="150" class="formbutton">
+                  </font></td>
+                </tr>
+                <tr>
+                  <td><font face="Verdana, Arial, Helvetica, sans-serif"><font size="1">Mensagem<strong>:</strong></font></font></td>
+                  <td rowspan="2"><font size="2">
+                    <textarea name="tx_mensagem" cols="50" rows="8" class="formbutton" id="tx_mensagem" input ></textarea>
+                  </font></td>
+                </tr>
+                <tr>
+                  <td height="85"><p><strong><font face="Verdana, Arial, Helvetica, sans-serif"><font size="1">
+                  </font></font></strong></p></td>
+                </tr>
+                <tr>
+                  <td height="22"></td>
+                  <td>
+                    <input name="Submit" type="submit"  class="formobjects" value="Enviar dados">
+              
+                    <input name="Reset" type="reset" class="formobjects" value="Redefinir">
+                  </td>
+                </tr>
+              </table>
+            </form>    
+             
+            </body>
+            </html> -->
