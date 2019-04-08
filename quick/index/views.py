@@ -243,6 +243,3 @@ class Oferta(View):
        if form.is_valid():
            form.save()
        return render(request,'index/oferta.html',{'form': form})
-
-
-
