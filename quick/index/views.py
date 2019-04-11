@@ -9,8 +9,20 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
 from django.views.generic import CreateView, UpdateView
 from django.utils import timezone
+from django.core.mail import send_mail
+from django.core.mail import EmailMessage
+from django.conf import settings
+from smtplib import SMTPRecipientsRefused
+from django.http import HttpResponse
+from django.template import Context
+from smtplib import SMTP as SMTP 
+
 
 # Create your views here.
+# class email (View):
+#     def get(self, request):
+   
+#         return render(request, 'index/pedidos.html')
 
 class DashboardView(View):
 
@@ -195,13 +207,21 @@ class ComprarAula(View):
           return render(request,'index/compra.html',{'aula': aula})
 
 
-      def post(self, request, id_aula):
+      def post(self, request, id_aula, *args, **kwargs):
         aula = Aula.objects.get(pk=id_aula) 
         aula.nome_aluno = request.POST.get('nome')
         aula.email = request.POST.get('email')
         aula.assunto = request.POST.get('assunto')
         aula.disponivel = False
-        aula.save()
+        # context = Context({'nome':aula.nome_aluno,'email':aula.email,'assunto':aula.assunto})
+        send_mail('ALGUEM COMPROU UMA AULA!! ENVIAR BOLETO PARA O SEGUINTE EMAIL',aula.email,settings.EMAIL_HOST_USER,
+        ['prof.dayvisonananias@gmail.com','prof.carlosmoura@gmail.com','aland295@gmail.com'], fail_silently=False)
+        aula.save() 
+
+       
+        
+   
+
         return redirect('catalogo', id_professor=aula.professor.pk)
     
 

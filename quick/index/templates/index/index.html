@@ -439,7 +439,8 @@
             <div class="card" style="width: 18rem;">
                 <img class="card-img-top" src= '{{professor.foto.url}}' alt="Card image cap" style="height:100%">
                 <div class="card-body">
-                    <h5 class="card-title" style="color:black">{{professor.nome}} {{professor.sobrenome}}</h5>
+                    <h5 class="card-title" style="color:black">{{professor.disciplina}}<br></br>{{professor.nome}} {{professor.sobrenome}} 
+                    </h5>
                     <p class="card-text" style="color:black"> {{professor.descricaocurta}}</p>
                     <a href="{% url 'catalogo' id_professor=professor.pk %} " style="font-size:15px;" class="btn btn-block btn-outline-danger">Acesse o Portfólio do professor</a>                    
                 </div>    

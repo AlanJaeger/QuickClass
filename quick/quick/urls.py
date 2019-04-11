@@ -50,5 +50,7 @@ urlpatterns = [
     url(r'logout/', Cadastro.as_view(), name='cadastro'),
     url(r'oferta', Oferta.as_view(), name='oferta'),
     url(r'compra/(?P<id_aula>\d+)', ComprarAula.as_view(), name='aula'),
+    # url(r'notify/', email.as_view(), name = 'email'),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
