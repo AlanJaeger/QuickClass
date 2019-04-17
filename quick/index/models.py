@@ -5,6 +5,8 @@ from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from datetime import timedelta, datetime, time
 from multiselectfield import MultiSelectField
+from django.core.mail import send_mail, mail_admins
+from django.template.loader import render_to_string
 
 # Create your models here.
 
@@ -66,6 +68,8 @@ class Aula(models.Model):
     curso = models.BooleanField(default = False)
     conteudo = models.CharField(max_length=700,blank=True, null =True)
     disponivel_curso = models.BooleanField(default=True)
+
+  
 
     # AgendamentoBloqueadoException = AgendamentoBloqueadoException
     # AgendamentoAtendidoException = AgendamentoAtendidoException

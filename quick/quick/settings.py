@@ -10,14 +10,16 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
+
+
+
+
 from dj_database_url import parse as database
 import decouple
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
 
 
 # Quick-start development settings - unsuitable for production
@@ -31,7 +33,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'nao.responder.quick@gmail.com' 
+EMAIL_HOST_PASSWORD = 'quick@123'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
 # Application definition
 
 INSTALLED_APPS = [
@@ -123,7 +129,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+ADMINS = [('alan', 'aland295@gmail.com')]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
@@ -138,3 +144,11 @@ MEDIA_URL = '/media/'
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/agenda/'
+
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = 'nao.responder.agilsistemas@gmail.com'
+# EMAIL_HOST_PASSWORD = 'agilsistemas123*'
+# EMAIL_PORT = 587
+
+
