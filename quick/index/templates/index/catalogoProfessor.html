@@ -199,10 +199,8 @@
             </a>
         </div> -->
                 <div class="card card-style">
-                    {% for aula in aulas %}
-                        {% if aula.curso == True %}
-                            {% if aula.disponivel == False %} 
-                        <p class="card-text card-text-edit">{{aula.nome_aula}} {{aula.dt_aula|date}}</p>
+                        {% for curso in cursos %}
+                        <p class="card-text card-text-edit"> {{curso.conteudo}} </p>
                             <section class="center slider">
                             <div class="carousel">
                                 <div class="card" style="width: 18rem;">
@@ -210,15 +208,14 @@
                                   <div class="card-body">
                                  <h5 class="card-title" style="color:black">{{aula.dt_aula|time}}</h5>
                                  <p class="card-text" style="color:black"> {{aula.professor.descricao}}</p>
-                                 <a class="btn btn-block btn-outline-danger" href="/compra/{{aula.pk}}">Alterar depois</a>      
+                                 <a class="btn btn-block btn-outline-danger" href="/compra_curso/{{curso.pk}}">Alterar depois</a>      
                                 </div> 
                                 </div>  
                              </div>
                             </section>  
-                    {%endif%} 
-                        {%endif%} 
-                    
-                    {%endfor%}
+                    {% endfor %}
+
+                   
                     
                         <!-- <div class="col-md-8
                                 

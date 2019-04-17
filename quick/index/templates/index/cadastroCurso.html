@@ -1,0 +1,111 @@
+{% extends 'index/painel.html' %}
+{% load staticfiles %}
+{% load user_tags %}
+
+
+
+{% if request.user|has_group:"Professor"%} 
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Quick Class</title>
+    <link rel="icon" type="image/icon" href="{% static "img/simboloQuick.png"%}">
+
+    <!--CSS do Bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!--CSS Quick Class-->
+    <link rel="stylesheet" type="text/css" href="{%static "css/FormProfessor.css"%}">
+
+    <!--Fonts CSS-->
+    <link href="{% static "https://fonts.googleapis.com/css?family=Yantramanav:700"%}" rel="stylesheet">
+</head>
+
+<body>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-fixed-top">
+        <div class="container">
+            <img class="img-fluid logo" src="{% static "img/logo-quick.png"%}">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home
+                        <span class="sr-only">(current)</span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--Navbar-->
+
+    <!--Card Form-->
+    {% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-style">
+                    <div class="row">
+                        <div class="col-6">
+                            <form class="mt-5 mr-5" action='{%url "cadastro_curso"%}' enctype="multipart/form-data" method="POST">
+                                {% csrf_token %}
+                                <!-- <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                            <label for="id_foto"  class="custom-file-upload btn btn-light" style="margin-bottom: 0px; margin-top: 32px;">Carregue seu curriculo em PDF</label>
+                                            {{form.foto}}
+                                            <label for="inputState" class="form-text" style="margin-top: 18px;">Disciplina a ministrar</label>
+                                            {{form.disciplina}}
+                                    </div>
+                                </div> -->
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEmail4" class="form-text">Nome do Curso</label>
+                                        {{form.titulo}}
+                                        </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="id_foto"  class="custom-file-upload btn btn-light" style="margin-bottom: 0px; margin-top: 32px;">Imagem</label>
+                                        {{form.imagem}}
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="inputEmail4" class="form-text">Conteudo do curso</label>
+                                        {{form.conteudo}}
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="inputEmail4" class="form-text">Titulo do curso</label>
+                                       {{form.titulo}}
+                                    </div>
+
+                                    
+                                    <!-- <input type="hidden"  value="{{professor.pk}}" id="inputProfessor" name="professor"/>    -->
+                                    
+                                   
+                                <button type="submit" class="btn btn-outline-light">Cadastrar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Card Form-->
+    {% endblock %}
+    {% endif %}

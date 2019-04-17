@@ -1,4 +1,10 @@
+{% extends 'index/painel.html' %}
 {% load staticfiles %}
+{% load user_tags %}
+
+
+
+{% if request.user|has_group:"Professor"%} 
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -46,14 +52,20 @@
         </div>
     </nav>
     <!--Navbar-->
+   
 
+    {% block content %}
+    
     <!--Card Form-->
+    <div class="panel panel-heading">
+        Agenda De Aulas
+    </div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card card-style">
                     <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-3" style="border-style:solid">
                                 <div class="card border-secondary mt-5 mb-5 ml-5" >
                                     <div class="card-header">Calendário</div>
                                     <div class="card-body text-secondary">
@@ -68,7 +80,7 @@
                         <div class="col-md-8">
                                 <!-- <div class="card card-style"> -->
                                         <div class="card border-secondary mt-5 mb-5 ml-5" >
-                                            <div class="card-header">Você é importante para nós</div>
+                                            <div class="card-header"></div>
                                                 <div class="card-body text-secondary">
                             <table class="table table-condensed table-hover">
                                 <thead>
@@ -224,3 +236,5 @@
             }).datepicker('update', '{{ dia|date:'d-m-Y' }}');  
     });
 </script>
+{% endblock %}
+{% endif %}
