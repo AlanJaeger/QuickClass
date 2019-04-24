@@ -684,7 +684,16 @@ text-decoration: none;
                         <ul id="submenu-2" class="collapse">
                             <li><a href="{% url 'agenda' %}"><i class="fa fa-users"></i> Agenda de Aulas </a></li>
                             <li><a href="/professor/"><i class="fa fa-archive"></i> Grade de Horários </a></li>
-                            <li><a href="{% url 'cadastro_curso' %}"><i class="fa fa-archive"></i> Grade de Horários </a></li>
+                            <li><a href="{% url 'cadastro_curso' %}"><i class="fa fa-archive"></i> Cadastrar Curso </a></li>
+                           <!-- {% if perms.sagacore.list_importacao %}
+                                {% endif %} -->
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="collapse" data-target="#submenu-3"><i class="fa fa-folder"></i> Turmas <i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                        <ul id="submenu-3" class="collapse">
+                            <!-- <li><a href="{% url 'agenda' %}"><i class="fa fa-users"></i> Agenda de Aulas </a></li> -->
+                            <li><a href="/cursos_turma/"><i class="fa fa-archive"></i> Turmas </a></li>
                            <!-- {% if perms.sagacore.list_importacao %}
                                 {% endif %} -->
                         </ul>

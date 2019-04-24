@@ -52,6 +52,9 @@ urlpatterns = [
     url(r'compra/(?P<id_aula>\d+)', ComprarAula.as_view(), name='aula'),
     url(r'compra_curso/(?P<id_curso>\d+)', ComprarCurso.as_view(), name='venda_curso'),
     url(r'cadastro_curso/', CadastroCurso.as_view(), name='cadastro_curso'),
+    url(r'cursos_turma/', ListaAlunos.as_view(), name='cursos_turma'),
+    url(r'alunos_lista/(?P<id_curso>\d+)', ListaAlunosCurso.as_view(), name='alunos_turma'),
+   
    
     # url(r'notify/', email.as_view(), name = 'email'),
 

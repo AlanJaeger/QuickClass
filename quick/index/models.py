@@ -20,7 +20,7 @@ class Aluno(models.Model):
     email = models.CharField(max_length = 80, blank=True, null=True)
 
 class Curso(models.Model):
-    aluno = models.ForeignKey('Aluno', on_delete = models.PROTECT, blank=True, null=True)
+    alunos = models.ManyToManyField('Aluno', blank = True)
     titulo = models.CharField(max_length = 80, blank=True, null=True)
     imagem = models.FileField(upload_to='media/', blank=True, null=True)
     conteudo = models.CharField(max_length = 80, blank=True, null=True)

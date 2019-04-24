@@ -58,54 +58,58 @@
 
     <!--Card Form-->
     {% block content %}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card card-style">
-                    <div class="row">
-                        <div class="col-6">
-                            <form class="mt-5 mr-5" action='{%url "cadastro_curso"%}' enctype="multipart/form-data" method="POST">
-                                {% csrf_token %}
-                                <!-- <div class="form-row">
-                                    <div class="form-group col-md-4">
-                                            <label for="id_foto"  class="custom-file-upload btn btn-light" style="margin-bottom: 0px; margin-top: 32px;">Carregue seu curriculo em PDF</label>
-                                            {{form.foto}}
-                                            <label for="inputState" class="form-text" style="margin-top: 18px;">Disciplina a ministrar</label>
-                                            {{form.disciplina}}
-                                    </div>
-                                </div> -->
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputEmail4" class="form-text">Nome do Curso</label>
-                                        {{form.titulo}}
-                                        </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="id_foto"  class="custom-file-upload btn btn-light" style="margin-bottom: 0px; margin-top: 32px;">Imagem</label>
-                                        {{form.imagem}}
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-4">
-                                        <label for="inputEmail4" class="form-text">Conteudo do curso</label>
-                                        {{form.conteudo}}
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="inputEmail4" class="form-text">Titulo do curso</label>
-                                       {{form.titulo}}
-                                    </div>
-
-                                    
-                                    <!-- <input type="hidden"  value="{{professor.pk}}" id="inputProfessor" name="professor"/>    -->
-                                    
-                                   
-                                <button type="submit" class="btn btn-outline-light">Cadastrar</button>
-                            </form>
-                        </div>
-                    </div>
+    <div class="row">
+        <div class="col-md-7 col-md-offset-2">
+          <form method="POST" enctype="multipart/form-data" action="{% url 'cadastro_curso' %}">
+              {% csrf_token %}
+              <div class="field">
+                  <label class="labelnome">Nome do Curso</label>
+                  <div class="control">
+                      <div class="">
+                      {{form.nome}}
+                      </div>
+                  </div>
+              </div>
+              <div class="field">
+                <label class="labelnome">Título do Curso</label>
+                <div class="control">
+                  {{form.titulo}}
                 </div>
-            </div>
+              </div>
+              <div class="field">
+                  <label class="labelnome">Conteúdo do Curso</label>
+                  <div class="control">
+                      {{form.conteudo}}
+                  </div>
+              </div>
+              <div class="field">
+                  <label class="labelnome">Informações Adicionais</label>
+                  <div class="control">
+                      {{form.informacoes}}
+                </div>
+              </div>
+      
+              <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-12">
+                            <label>Imagem</label>
+                            <div class="file is-info has-name">
+                              <label class="file-label">
+                              {{form.imagem}}
+                              </label>
+                            </div>
+                          </div>
+                      </div>
+              </div>
+      
+              <div class="field is-grouped" style="
+              margin-top: 10px;">
+                  <button type="submit" class="btn btn-primary">
+                    Salvar
+                  </button>
+              </div>
+          </form>
+          </div>
         </div>
-    </div>
-    <!--Card Form-->
-    {% endblock %}
+        {% endblock %}
     {% endif %}
