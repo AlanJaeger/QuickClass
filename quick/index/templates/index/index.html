@@ -33,421 +33,71 @@
 }
 </style>
 <body>
-    <div class="container-fluid header">
-        <div class="row">
-            <div class="col-md-6">
-                <a class="logo" href="/">
-                    <img class="img-responsive img-logo" src="{% static "img/logo-quick.png" %}">
-                </a>
-            </div>
-
+    <div class="row" style="margin-right:0px!important;">
+        <div class="col-md-6" style="padding-left:67px;">
+         <a class="logo" href="/">
+            <img class="img-responsive img-logo" src="{% static "img/logo-quick.png" %}">
+         </a>
+        </div>
+    
             <!-- {% if user.is_authenticated %}
             <div class="col-md-2">
                 <p>Olá {{ user }}</p> 
             </div>
             {% endif %} -->
-
-            {% if user.is_authenticated %}
-            <div class="col-md-2" style=" max-width:159px; margin-left:115px;">
-                 <a class="signin-button text-signin" style="text-decoration:none;" href=/logout/>Sair</a> 
-            </div>
+   
+        {% if user.is_authenticated %}
+        <div class="col-md-2 sair">
+            <a class="signin-button text-signin" style="text-decoration:none;" href=/logout/>Sair</a> 
+        </div>
            
-            {% else %}
-            <div class="col-md-2" style=" max-width:156px; margin-left:115px;">
-                <a class="signin-button tyext-signin" style="text-decoration:none;" href=/login/>Iniciar Sessão</a> 
-           </div>
-           
-           
-           {% endif %}
-           {% if not user.is_authenticated %}
-            <div class="col-md-2" style=" max-width:144px;">
+        {% else %}
+        <div class="col-md-2 iniciar">
+            <a class="signin-button text-signin iniciar" style="text-decoration:none;" href=/login/>Iniciar Sessão</a> 
+        </div>   
+        {% endif %}
+            {% if not user.is_authenticated %}
+             <div class="col-md-2 regi">
                 <a class="signin-button text-signin" style="text-decoration:none;" href=/cadastro/>Registrar-se</a> 
-           </div>
+             </div>
            {% endif %}
-           <div class="col-md-2">
+            <div class="col-md-2 quem">
                 <a class="signin-button text-signin" style="text-decoration:none;" href=/equipe/>Quem Somos</a> 
-           </div>
-           
-           
-        </div>
-        <div class="row">
-            <div class="col text-space pitch">
-                <h1 class="pitch_title">Os melhores professores do RN <br> em um só lugar <br>
-                </h1>
-                <p class="pitch_subtitle">QUICK CLASS O SEU PORTAL DE AULAS ONLINE</p>
-                
-                <div class="row">
-                    <div class="col-md-12">
-                        <p class ="subtitulo" style="margin-left:291px;">
-                            Conheça o nosso time de professores
-                        </p>
-                    </div>
-                    
-                </div>
-                
             </div>
-        </div>
     </div>
-
-    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="inscrever" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content col-md-11 col-md-offset-0 text-center">
-                    <div class="modal-header" style="border-bottom: 0px; margin-top: 20px">
-                        <h2 class="modal-title" id="inscrever" style="
-                        margin-left: 106px; font-family:Roboto; font-weight:600">
-                        iniciar sessão</h2>
-                        <button type="button" class="close" style="margin-top: -106px; margin-right: -13px" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                              <label for="exampleInputEmail1" style="float:left">Email</label>
-                              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite seu email">
-                            </div>
-                            <div class="form-group">
-                              <label for="exampleInputPassword1" style="float:left">Senha</label>
-                              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Digite sua senha">
-                            </div>
-                            <button type="submit" class="signin-button text-signin" style="font-size:17px;">Entrar</button>
-                          </form>
-                    </div>
-                </div>
-            </div>
+        
+        <div class="row cel3" style="margin-right:0px!important;">
+            <div class="col-md-10" style="padding-left:77px;">
+                    <h1 class="pitch_title cel">Os melhores professores do RN <br> em um só lugar <br>
+                    </h1>
+                    <p class="pitch_subtitle cel1" style="font-size:30px;">QUICK CLASS O SEU PORTAL DE AULAS ONLINE</p>
+            </div> 
         </div>
 
-        <div class="modal fade" id="cadastro" tabindex="-1" role="dialog" aria-labelledby="inscrever" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content col-md-11 col-md-offset-0 text-center">
-                    <div class="modal-header" style="border-bottom: 0px; margin-top: 20px">
-                        <h2 class="modal-title" id="inscrever" style="
-                        margin-left: 78px; font-family:Roboto; font-weight:600">
-                        Faça seu cadastro</h2>
-                        <button type="button" class="close" style="margin-top: -106px; margin-right: -13px" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                              <label for="exampleInputEmail1" style="float:left">Username</label>
-                              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite seu nome de usuario">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1" style="float:left">Email</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite seu email">
-                              </div>
-                            <div class="form-group">
-                              <label for="exampleInputPassword1" style="float:left">Senha</label>
-                              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Digite sua senha">
-                            </div>
-                            <button type="submit" class="signin-button text-signin" style="font-size:17px;">Cadastrar</button>
-                          </form>
-                    </div>
-                </div>
+        <div class="row" style="margin-right:0px!important;">
+            <div class="col-md-12">
+                <h1 class="cel2" style="text-align:center; margin-top:200px;" >
+                     Conheça o nosso time de professores
+                </h1>   
             </div>
-        </div>
-
-    
-              <div class="modal fade bd-example-modal-lg" id="modalDayvison" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                  <div class="modal-content">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <img src="{% static "img/dayvisonModal.png"%}"  styl alt="">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="card" style="width: 500px; height:634px">
-                                        <div class="card-body">
-                                        <div class="col-md-12" style="border-bottom:1px solid #6c757d;">
-                                                <h5 class="card-title" style="color: black;
-                                                margin-left: 28px;
-                                                font-size: 36px;
-                                                margin-top: 6px;
-                                                margin-bottom: 23px;">Prof. Dayvison Ananias</h5>
-                                                <h6 class="card-subtitle mb-2 text-muted" style="margin-left: 28px;
-                                                font-size: 22px;">Orientação Educacional</h6>
-                                        </div>
-                                          <p class="card-text" style="font-weight:bolder; color:black; font-family:'Roboto',sans-serif;
-                                          font-size: 155%;
-                                          line-height: 1.6;
-                                          padding: 33px;"> Ele é Pedagogo e Especialista em Educação Especial Inclusiva. Também possui formação em Coaching, Docência, Coaching Educacional e MBA em Gestão Estratégica de Ensino. Com 11 anos de experiência como Professional IT.</p>
-                                         
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#ExemploModalCentralizado">
-                                                Compre agora
-                                              </button>
-                                          </div>
-
-                                          <div class="col-md-6">
-                                            <a href="{% url 'aluno' %} " class="btn btn-block btn-outline-danger">Acesse o catalogo</a>
-                                          </div>
-                                    </div>
-                                         
-                                        </div>
-                                      </div>
-                                </div>
-                            </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="modal fade bd-example-modal-lg" id="modalSthephany" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                  <div class="modal-content">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <img src="{% static "img/sthephanyModal.png"%}"  styl alt="">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="card" style="width: 500px; height:634px">
-                                        <div class="card-body">
-                                        <div class="col-md-12" style="border-bottom:1px solid #6c757d;">
-                                                <h5 class="card-title" style="color: black;
-                                                margin-left: 28px;
-                                                font-size: 36px;
-                                                margin-top: 6px;
-                                                margin-bottom: 23px;">Prof. Sthéphanye Revoredo</h5>
-                                                <h6 class="card-subtitle mb-2 text-muted" style="margin-left: 28px;
-                                                font-size: 22px;">Biologia</h6>
-                                        </div>
-                                          <p class="card-text" style="font-weight:bolder; color:black; font-family:'Roboto',sans-serif;
-                                          font-size: 155%;
-                                          line-height: 1.6;
-                                          height:370px;
-                                          overflow: scroll;
-                                          padding: 33px;"> Teacher Sthéphanye Revoredo, brasileira nascida em Natal, biologa e mestre em Biotecnologia, professora bilingue de inglês a 7 anos, residiu por 5 anos nos EUA cidade Orlando/FL, trabalhou com amerianos na IKea e com seu visto de estudante estudou inglês na escola Berlitz, fez cursos no Sea World na área de biologia marinha. Trabalha também com consultoria e assessoria para turistas brasileiros</p>
-                                         
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#ExemploModalCentralizado">
-                                                Compre agora
-                                              </button>
-                                          </div>
-
-                                          <div class="col-md-6">
-                                            <a href="{% url 'aluno' %} " class="btn btn-block btn-outline-danger">Acesse o catalogo</a>
-                                          </div>
-                                    </div>
-                                         
-                                        </div>
-                                      </div>
-                                </div>
-                            </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="modal fade bd-example-modal-lg" id="modalPlanas" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                  <div class="modal-content">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <img src="{% static "img/planasModal.png"%}"  styl alt="">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="card" style="width: 500px; height:634px">
-                                        <div class="card-body">
-                                        <div class="col-md-12" style="border-bottom:1px solid #6c757d;">
-                                                <h5 class="card-title" style="color: black;
-                                                margin-left: 28px;
-                                                font-size: 36px;
-                                                margin-top: 6px;
-                                                margin-bottom: 23px;">Prof.Carlos Planas</h5>
-                                                <h6 class="card-subtitle mb-2 text-muted" style="margin-left: 28px;
-                                                font-size: 22px;">Inglês</h6>
-                                        </div>
-                                          <p class="card-text" style="font-weight:bolder; color:black; font-family:'Roboto',sans-serif;
-                                          font-size: 155%;
-                                          line-height: 1.6;
-                                          height:410px;
-                                          overflow: scroll;
-                                          padding: 33px;">Teacher Carlos Planas, nascido na cidade de Secaucus/ Nova Jersey. Já residiu em Porto Rico por 8 anos, onde lhe capacitou a falar espanhol fluente. Hoje trabalha ensinando inglês para brasileiros e hispanos em Orlando/FL e também trabalhou por muitos anos dando auxilio e suporte aos clientes brasileiros e hispanos no aeroporto e na cidade Orlando/FL.</p>
-                                         
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#ExemploModalCentralizado">
-                                                Compre agora
-                                              </button>
-                                          </div>
-
-                                          <div class="col-md-6">
-                                            <a href="{% url 'aluno' %} " class="btn btn-block btn-outline-danger">Acesse o catalogo</a>
-                                          </div>
-                                    </div>
-                                         
-                                        </div>
-                                      </div>
-                                </div>
-                            </div>
-                  </div>
-                </div>
-              </div>
-
-
-              <div class="modal fade bd-example-modal-lg" id="modalJuliana" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                  <div class="modal-content">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <img src="{% static "img/julianaModal.png"%}"  styl alt="">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="card" style="width: 500px; height:634px">
-                                        <div class="card-body">
-                                        <div class="col-md-12" style="border-bottom:1px solid #6c757d;">
-                                                <h5 class="card-title" style="color: black;
-                                                margin-left: 28px;
-                                                font-size: 36px;
-                                                margin-top: 6px;
-                                                margin-bottom: 23px;">Prof.Juliana Teixeira</h5>
-                                                <h6 class="card-subtitle mb-2 text-muted" style="margin-left: 28px;
-                                                font-size: 22px;">Matemática</h6>
-                                        </div>
-                                          <p class="card-text" style="font-weight:bolder; color:black; font-family:'Roboto',sans-serif;
-                                          font-size: 155%;
-                                          line-height: 1.6;
-                                          height:410px;
-                                          overflow: scroll;
-                                          padding: 33px;">Ela é professora de matemática formada pela Universidade Federal do Rio Grande do Norte (UFRN) e especialista em Ensino de Ciências Naturais e Matemática pelo Instituto Federal do Rio Grande do Norte (IFRN). Com 5 anos de experiência docente, já lecionou em escola particular e atualmente está na rede Pública, também atua como professora preceptora do programa de Residência Pedagógica da UFRN.</p>
-                                         
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#ExemploModalCentralizado">
-                                                Compre agora
-                                              </button>
-                                          </div>
-
-                                          <div class="col-md-6">
-                                            <a href="{% url 'aluno' %} " class="btn btn-block btn-outline-danger">Acesse o catalogo</a>
-                                          </div>
-                                    </div>
-                                         
-                                        </div>
-                                      </div>
-                                </div>
-                            </div>
-                  </div>
-                </div>
-              </div>
-
-
-              <div class="modal fade bd-example-modal-lg" id="modalMiracildo" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                  <div class="modal-content">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <img src="{% static "img/miracildoModal.png"%}"  styl alt="">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="card" style="width: 500px; height:634px">
-                                        <div class="card-body">
-                                        <div class="col-md-12" style="border-bottom:1px solid #6c757d;">
-                                                <h5 class="card-title" style="color: black;
-                                                margin-left: 28px;
-                                                font-size: 36px;
-                                                margin-top: 6px;
-                                                margin-bottom: 23px;">Prof.Miracildo Quintino</h5>
-                                                <h6 class="card-subtitle mb-2 text-muted" style="margin-left: 28px;
-                                                font-size: 22px;">Matemática</h6>
-                                        </div>
-                                          <p class="card-text" style="font-weight:bolder; color:black; font-family:'Roboto',sans-serif;
-                                          font-size: 155%;
-                                          line-height: 1.6;
-                                          height:410px;
-                                          overflow: scroll;
-                                          padding: 33px;">Prof° Miracildo Quintino é formado em licenciatura plena em matemática e pós graduando em Docência em ensino superior MBA. Tem 18 anos de experiência na docência, lecionou matemática, física e química no ensino médio por muito tempo, bem como no ensino fundamental com matemática. Tem experiência com gestão escolar e coordenação de estratégia de ensino.</p>
-                                         
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#ExemploModalCentralizado">
-                                                Compre agora
-                                              </button>
-                                          </div>
-
-                                          <div class="col-md-6">
-                                            <a href="{% url 'aluno' %} " class="btn btn-block btn-outline-danger">Acesse o catalogo</a>
-                                          </div>
-                                    </div>
-                                         
-                                        </div>
-                                      </div>
-                                </div>
-                            </div>
-                  </div>
-                </div>
-              </div>
-
-
-              <div class="modal fade bd-example-modal-lg" id="modalHamilton" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                  <div class="modal-content">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <img src="{% static "img/hamiltonModal.jpg"%}"  styl alt="">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="card" style="width: 500px; height:634px">
-                                        <div class="card-body">
-                                        <div class="col-md-12" style="border-bottom:1px solid #6c757d;">
-                                                <h5 class="card-title" style="color: black;
-                                                margin-left: 28px;
-                                                font-size: 36px;
-                                                margin-top: 6px;
-                                                margin-bottom: 23px;">Prof. Hamilton Oliveira</h5>
-                                                <h6 class="card-subtitle mb-2 text-muted" style="margin-left: 28px;
-                                                font-size: 22px;">Matemática</h6>
-                                        </div>
-                                          <p class="card-text" style="font-weight:bolder; color:black; font-family:'Roboto',sans-serif;
-                                          font-size: 155%;
-                                          line-height: 1.6;
-                                          height:410px;
-                                          overflow: scroll;
-                                          padding: 33px;"> Ele é Matemática, especialista em ensino da matemática pela Universidade Federal do Rio Grande do Norte (UFRN) e Mestre em educação pela Universidade Lusófona de Humanidades e Tecnologias (LUSÓFONA). Com 20 anos de experiência docente, já lecionou nos principais cursinhos e escolas de Natal e outros estados do Brasil. Atuou por 19 anos como professor Universitário, tendo ministrado aulas de Matemática, Cálculo e estatística em diversas áreas do ensino superior. Também foi professor de Estatística Aplicada a Segurança Pública no Curso de Aperfeiçoamento de Oficial da Polícia.</p>
-                                         
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#ExemploModalCentralizado">
-                                                Compre agora
-                                              </button>
-                                          </div>
-
-                                          <div class="col-md-6">
-                                            <a href="{% url 'aluno' %} " class="btn btn-block btn-outline-danger">Acesse o catalogo</a>
-                                          </div>
-                                    </div>
-                                         
-                                        </div>
-                                      </div>
-                                </div>
-                            </div>
-                  </div>
-                </div>
-              </div>
-
-    <section class="center slider" >
-        <div class="carousel">
-                {% for professor in professor %}
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src= '{{professor.foto.url}}' alt="Card image cap" style="height:100%">
+       
+            <section class="center slider" >
+                <div class="carousel">
+                    {% for professor in professor %}
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src= '{{professor.foto.url}}' alt="Card image cap" style="height:100%">
                 <div class="card-body">
-                    <h5 class="card-title" style="color:black">{{professor.disciplina}}<br></br>{{professor.nome}} {{professor.sobrenome}} 
+                    <h5 class="card-title" style="color:black; font-size:1.90rem">{{professor.disciplina}}<br></br>{{professor.nome}} {{professor.sobrenome}} 
                     </h5>
-                    <p class="card-text" style="color:black"> {{professor.descricaocurta}}</p>
+                    <p class="card-text" style="color:black; font-size:20px;"> {{professor.descricaocurta}}</p>
                     <a href="{% url 'catalogo' id_professor=professor.pk %} " style="font-size:15px;" class="btn btn-block btn-outline-danger">Acesse o Portfólio do professor</a>                    
                 </div>    
-            </div>
-            {%endfor%}
+                </div>
+                   {%endfor%}
+                </div>
+            </section>
         </div>
-    </section>
+
 
     <div id="features">
         
@@ -455,7 +105,7 @@
             <div class="center columns size-80">
                 <a class="column is-selected" href="#" data-id="cancelanytime">
                     <img alt="Cancel anytime" src="{% static "img/people.svg" %}"/>
-                    <h2>
+                    <h2 class="valores">
                         Nossos Valores
                     </h2>
                     
@@ -463,7 +113,7 @@
 
                 <a class="column" href="#" data-id="watchanywhere">
                     <img alt="Watch anywhere" src="{% static "img/customer.svg" %}" />
-                    <h2>
+                    <h2 class="servicos">
                         Conheça outros serviços
                     </h2>
                 </a>
@@ -477,7 +127,7 @@
                 <div class="columns">
                 <div class="container-img">      
                     <div class="section section-our-clients-freebie"> 
-                        <ul class="nav nav-text" role="tablist">
+                        <ul class="nav nav-text tab1" role="tablist">
                             <li class="active">
                                 <a href="#testimonial1" role="tab" data-toggle="tab">
                                  <div class="image-clients zoom" >
@@ -542,46 +192,46 @@
                 <div class="columns size-90 center">
                     <div class="column text-center">
                        <div class="row">
-                <div class="col-md-3" style="max-width: 20%;">
+                <div class="col-md-3 aula" style="max-width: 20%;">
                     <div class="info-icon">
                         <div class="icon zoom" style="color:white; font-size:55px">
                                 <i class="fas fa-chalkboard-teacher"></i>
                         </div>
-                        <p class="description">Aulas Particulares Online</p>
+                        <p class="description box">Aulas Particulares Online</p>
                     </div>
                 </div>
-                <div class="col-md-3" style="max-width: 20%;">
+                <div class="col-md-3 modulo" style="max-width: 20%;">
                     <div class="info-icon">
                         <div class="icon zoom" style="color: white; font-size: 55px">
                                 <i class="fas fa-th-large"></i>
                         </div>
-                        <p class="description">Módulos de conteúdos</p>
+                        <p class="description box">Módulos de conteúdos</p>
                     </div>
                 </div>
-                <div class="col-md-3" style="max-width: 20%;">
+                <div class="col-md-3 curso" style="max-width: 20%;">
                     <div class="info-icon">
                         <div class="icon zoom" style="color: white; font-size: 50px">
                                 <i class="fas fa-book"></i>
                         </div>
-                        <p class="description" style="margin-left:-15px;">Cursos isolados por matéria</p>
+                        <p class="description box" style="margin-left:-15px;">Cursos isolados por matéria</p>
                     </div> 
                 </div>
 
-                <div class="col-md-3" style="max-width: 20%;">
+                <div class="col-md-3 cerebro" style="max-width: 20%;">
                     <div class="info-icon">
                         <div class="icon zoom" style="color: white; font-size: 55px">
                                 <i class="fas fa-brain"></i>
                         </div>
-                        <p class="description">Cursos por área de conhecimento</p>
+                        <p class="description box">Cursos por área de conhecimento</p>
                     </div>
                 </div>
 
-                <div class="col-md-3" style="max-width: 20%;">
+                <div class="col-md-3 peda" style="max-width: 20%;">
                         <div class="info-icon">
                             <div class="icon zoom" style="color: white; font-size: 55px">
                                     <i class="fas fa-hand-holding-heart"></i>
                             </div>
-                            <p class="description">Acompanhamento Pedagógico</p>
+                            <p class="description box">Acompanhamento Pedagógico</p>
                         </div>
                     </div>
             </div>
@@ -639,7 +289,7 @@
                          <strong>Quick Class</strong> 
                     </h6>
                     <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width:60px; color:white;">
-                    <p style="margin-top:-39px">Aprenda aonde e quando quiser!</p>
+                    <p style="margin-top:-39px; font-size:25px;">Aprenda aonde e quando quiser!</p>
                 </div>
                 <!--/.First column-->
 
@@ -668,10 +318,10 @@
                     </h6>
                     <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto edit-text" style="width: 60px;">
                     <p>
-                        <a class="edit-text" style="text-decoration: none;" href="/equipe">Quem Somos</a>
+                        <a class="edit-text" style="text-decoration: none; font-size:25px;" href="/equipe">Quem Somos</a>
                     </p>
                     <p>
-                            <a class="edit-text" style="text-decoration: none;" href="#!">Ajuda</a>
+                            <a class="edit-text" style="text-decoration: none; font-size:25px;" href="#!">Ajuda</a>
                         </p>
                     <p>
                         <!-- <a class="edit-text" style="text-decoration: none;" href="/professor">Trabalhe Conosco</a> -->
@@ -687,9 +337,10 @@
                     </h6>
                     <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                     <p>
-                        <i class="fa fa-home mr-3"></i> contato@quick-class.com</p>
+                        <i class="fa fa-home mr-3"></i><a class="edit-text" style="text-decoration: none; margin-left:6px; font-size:20px;">contato.quick-class.com</a></p>
+                        
                     <p>
-                        <i class="fa fa-envelope mr-3"></i><a class="edit-text" style="text-decoration: none; margin-left:6px;" href="mailto:suporte@quickclass.net.br">suporte@quick-class.com</a></p>
+                        <i class="fa fa-envelope mr-3"></i><a class="edit-text" style="text-decoration: none; margin-left:6px; font-size:18px;" href="mailto:suporte@quickclass.net.br">suporte@quick-class.com</a></p>
                     <p>
                         <!-- <i class="fa fa-phone mr-3"></i>(84) 2226-8230</p> -->
                 </div>
