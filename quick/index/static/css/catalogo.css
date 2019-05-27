@@ -1,0 +1,27 @@
+@media screen and (max-width : 768px) {
+   .foto{
+       width: 265px!important;
+   }
+   .tabela{
+    width: 371px!important;
+    margin-left: 3px!important;
+   }
+   .texto-tabela{
+       height: 117px!important;
+   }
+   .catalogo-card{
+       width: 14rem!important;
+   }
+   .coluna{
+     flex-direction: row-reverse;
+    }
+    .hora-table{
+        margin-right: 30px!important;
+    }
+    .dat-table{
+        margin-right: 30px!important;
+    }
+    .comprar-table{
+        margin-right: 0px!important;
+    }
+}

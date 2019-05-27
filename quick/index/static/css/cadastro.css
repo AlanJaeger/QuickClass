@@ -1,0 +1,23 @@
+@media screen and (max-width : 768px) {
+    .form-control-plain{
+        width: 89%!important;
+        margin-left: 42px;
+    }
+    .nome{
+        margin-left: -46px;
+    }
+    .email{
+        margin-left: -47px;
+    }
+    .senha{
+        margin-left: -47px;
+    }
+    .cadastre{
+        margin-left: -47px;
+    }
+    .botao{
+        display: block !important;
+        width: 100%;
+        margin-left: -31px;
+    }
+}

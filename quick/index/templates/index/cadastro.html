@@ -26,7 +26,8 @@
                 <link href='https://fonts.googleapis.com/css?family=Cambo|Lato:400,700' rel='stylesheet' type='text/css'>
                 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
                 <link href="assets/css/fonts/pe-icon-7-stroke.css" rel="stylesheet">
-              
+                <link rel="stylesheet" type="text/css" href="{% static "css/cadastro.css" %}">
+                
               
               </head>
 
@@ -78,7 +79,7 @@
       <div class="form-container">
         <div class="col-sm-9 col-sm-offset-7 col-xs-10 col-xs-offset-1 text-center" style="margin-top:75px;">
           <div class="title-area">
-            <h2 style="font-size:2.7rem">Cadastre-se</h2>
+            <h2 style="font-size:2.7rem" class="cadastre">Cadastre-se</h2>
           </div>
           
           <form action="{% url 'cadastro' %}" method="post">
@@ -91,7 +92,7 @@
           {{ form.email }}<br> -->
 
           <label>
-            <h4>Nome de Usuário</h4>
+            <h4 class="nome">Nome de Usuário</h4>
           </label>
 
           <div class="form-group" style="width:350px; margin-left:-55px">
@@ -99,7 +100,7 @@
           </div>
 
           <label>
-            <h4>E-mail</h4>
+            <h4 class="email">E-mail</h4>
           </label>
           
           <div class="form-group" style="width:350px; margin-left:-55px">
@@ -108,29 +109,29 @@
           
 
           <label>
-            <h4>Senha</h4>
+            <h4 class="senha">Senha</h4>
           </label>
 
           <div class="form-group" style="width:350px; margin-left:-55px">
             {{ form.password }}
           </div>
-          <button type="submit" class="btn btn-danger btn-round btn-fill btn-wd-size" style="float: right;
-          background-color: #fe1043;
-          line-height: normal;
-          margin-top: 50px;
-          margin-right: 3%;
-          padding: 7px 17px;
-          border-radius: 3px;
-          border: 0;
-          cursor: pointer;
-          -o-transition: .5s;
-          -ms-transition: .5s;
-          -moz-transition: .5s;
-          -webkit-transition: .5s;
-          transition: .5s;
-          margin-top: 55px;
-          margin-bottom: 50px;">Cadastrar</button>
         </form>
+
+        <button type="submit" class="btn btn-danger btn-round btn-fill btn-wd-size botao"  style="background-color: #fe1043;
+        line-height: normal;
+        margin-top: 50px;
+        margin-right: 3%;
+        padding: 7px 17px;
+        border-radius: 3px;
+        border: 0;
+        cursor: pointer;
+        -o-transition: .5s;
+        -ms-transition: .5s;
+        -moz-transition: .5s;
+        -webkit-transition: .5s;
+        transition: .5s;
+        margin-top: 55px;
+        margin-bottom: 50px;">Cadastrar</button>
           <!--
           <p class="text-gray">
             By signing up you agree to
