@@ -1,0 +1,19 @@
+@media screen and (max-width : 768px) {
+    .backgroundd{
+        margin-top: 0px;
+        height: 0px;
+    }
+    .title-area{
+        text-align: left !important;
+    }
+    .formulario{
+        float: left;
+        margin-left: -37px!important;
+    }
+    .entrar{
+        display: block !important;
+        width: 100%;
+        margin-left: -31px;
+    }
+    
+}

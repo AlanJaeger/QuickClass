@@ -591,7 +591,10 @@ text-decoration: none;
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="/">                                                
-                    <img src="/static/images/Agil-saga-branco.png" alt="LOGO">
+                    <img src="{% static "img/logo-quick.png"%}" style="    width: 37%;
+                    height: 50px;
+                    margin-top: -1px;
+                " alt="LOGO">
                 </a>
             </div>
             <!-- Top Menu Items -->
@@ -665,11 +668,10 @@ text-decoration: none;
                 </li>          
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="https://app.kazah.com.br/img/newuser.png" class="img-circle" style="margin-right: 10px" alt="Cinque Terre" width="20" height="20"> {% if user.is_authenticated %}
-                        {{ user.userprofile.pessoa.nome }}
+                        {{ user.userprofile.nome }}
                         {% endif %} <b class="fa fa-angle-down"></b></a>
                     <ul class="dropdown-menu">
-                        {% if perms.sagacore.ver_empresa_preferencias %}
-                        {% endif %}
+                        <a  class="nav-link" href=/logout/>Sair</a> 
                         <li class="divider"></li>                            
                     </ul>
                 </li>
@@ -678,11 +680,20 @@ text-decoration: none;
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">    
                     <li>
-                        <a href="#" data-toggle="collapse" data-target="#submenu-2"><i class="fa fa-folder"></i> Cadastros <i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                        <a href="#" data-toggle="collapse" data-target="#submenu-2"><i class="fa fa-folder"></i> Agenda <i class="fa fa-fw fa-angle-down pull-right"></i></a>
                         <ul id="submenu-2" class="collapse">
-                            <li><a href="{% url 'cadastrar_aula' %}"><i class="fa fa-users"></i> Cadastro de Aula </a></li>
-                            <li><a href=><i class="fa fa-archive"></i> Cadastro de Módulos </a></li>
-                            <li><a href=><i class="fa fa-book"></i> Cadastro de Cursos </a></li>                        
+                            <li><a href="{% url 'agenda' %}"><i class="fa fa-users"></i> Agenda de Aulas </a></li>
+                            <li><a href="/professor/"><i class="fa fa-archive"></i> Grade de Horários </a></li>
+                            <li><a href="{% url 'cadastro_curso' %}"><i class="fa fa-archive"></i> Cadastrar Curso </a></li>
+                           <!-- {% if perms.sagacore.list_importacao %}
+                                {% endif %} -->
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="collapse" data-target="#submenu-3"><i class="fa fa-folder"></i> Turmas <i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                        <ul id="submenu-3" class="collapse">
+                            <!-- <li><a href="{% url 'agenda' %}"><i class="fa fa-users"></i> Agenda de Aulas </a></li> -->
+                            <li><a href="/cursos_turma/"><i class="fa fa-archive"></i> Turmas </a></li>
                            <!-- {% if perms.sagacore.list_importacao %}
                                 {% endif %} -->
                         </ul>

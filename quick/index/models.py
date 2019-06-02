@@ -11,9 +11,25 @@ from django.template.loader import render_to_string
 # Create your models here.
 
 class Oferta(models.Model):
-    aula = models.ForeignKey('Aula', on_delete=models.PROTECT)
+    aula = models.ForeignKey('Aula', on_delete=models.PROTECT, blank=True, null=True)
     preco = models.CharField(max_length = 10, blank = True)
     conteudo = models.CharField(max_length = 300, blank = True)
+
+class Aluno(models.Model):
+    nome = models.CharField(max_length = 80, blank=True, null=True)
+    email = models.CharField(max_length = 80, blank=True, null=True)
+
+class Curso(models.Model):
+    alunos = models.ManyToManyField('Aluno', blank = True)
+    titulo = models.CharField(max_length = 80, blank=True, null=True)
+    imagem = models.FileField(upload_to='media/', blank=True, null=True)
+    conteudo = models.CharField(max_length = 80, blank=True, null=True)
+    nome = models.CharField(max_length = 80, blank=True, null=True)
+    informacoes = models.CharField(max_length = 80, blank=True, null=True)
+    professor = models.ForeignKey('Professor', on_delete=models.PROTECT, null=True)
+
+    def __str__(self):
+        return self.titulo
 
 class Disciplina(models.Model):
     nome = models.TextField()

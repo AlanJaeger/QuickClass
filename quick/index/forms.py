@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Aula, Grade, Oferta
+from .models import Aula, Grade, Oferta, Curso
 from django.forms import Form, ModelForm, ModelChoiceField, TextInput, DateField, DateInput, ImageField, FileInput, CharField, IntegerField,Select, TimeInput
 from django.utils.timezone import now
 from django import forms
@@ -82,3 +82,19 @@ class OfertaForm(forms.Form):
     preco = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     oferta = forms.ModelChoiceField(queryset=Aula.objects.all())
 
+
+class CursoForm(ModelForm):
+    class Meta:
+        model = Curso
+        fields = ['titulo', 'imagem', 'conteudo', 'nome', 'informacoes', 'professor']
+        exclude =['professor']
+        widgets = {
+            'titulo': TextInput(attrs={'class':'form-control', 'placeholder':'Titulo do curso'}),
+            'imagem' : FileInput(attrs={'class':'form-control', 'placeholder':'Digite seu nome'}),
+            'conteudo' : TextInput(attrs={'class':'form-control', 'placeholder':'Conteudo do Curso'}),
+            'nome' : TextInput(attrs={'class':'form-control', 'placeholder':'Nome do curso no catalogo'}),
+            'informacoes' : TextInput(attrs={'class':'form-control', 'placeholder':'informações adicionais sobre o curso'}),
+
+        }
+
+    

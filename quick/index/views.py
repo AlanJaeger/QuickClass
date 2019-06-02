@@ -1,10 +1,10 @@
 #Create your views here.
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 import datetime
 from django.views import View
-from index.models import Professor, Aula, Grade, Oferta
-from .forms import AulaForm, UserForm, GradeForm, OfertaForm
+from index.models import Professor, Aula, Grade, Oferta, Curso, Aluno
+from .forms import AulaForm, UserForm, GradeForm, OfertaForm, CursoForm
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
 from django.views.generic import CreateView, UpdateView
@@ -23,6 +23,28 @@ from smtplib import SMTP as SMTP
 #     def get(self, request):
    
 #         return render(request, 'index/pedidos.html')
+
+class CadastroCurso(View):
+    def get(self, request):
+        form = CursoForm()
+        return render(request, 'index/cadastroCurso.html', {'form':form})
+
+    def post(self, request):
+        form = CursoForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            # print('oloco')
+            # # form.save(commit=False)
+            professorr = Professor.objects.get(user=self.request.user)
+            # # form.professor = professor
+            # form.cleaned_data['professor'] = professor
+            # form.save()
+            professor = form.save(commit = False)
+            professor.professor = professorr
+            professor.save()
+
+        return render(request,'index/cadastroCurso.html',{'form': form})
+
 
 class DashboardView(View):
 
@@ -161,9 +183,9 @@ class Cadastro(View):
 
         return render(request,'index/cadastro.html', {'form': form})
 
-class Curso(View):
-    def get(self, request):
-        return render(request, 'index/curso.html')
+# class Curso(View):
+#     def get(self, request):
+#         return render(request, 'index/curso.html')
 
 class QuemSomos(View):
     def get(self, request):
@@ -172,7 +194,7 @@ class QuemSomos(View):
 class CatalogoProfessor(View):
      def get(self, request, id_professor):
         professor = Professor.objects.get(pk=id_professor)   
-        
+
         if request.GET.get('dia') == None:
             dia = datetime.datetime.now().strftime("%d-%m-%Y")
         else:
@@ -180,13 +202,22 @@ class CatalogoProfessor(View):
 
         dia = timezone.make_aware(datetime.datetime.strptime(dia, '%d-%m-%Y'))
         aulas = Aula.objects.filter(professor=professor, disponivel=True)
+        curso = Curso.objects.filter(professor = professor)
+
         ctx = {
             'aulas': aulas,
-            'professor': professor
+            'professor': professor,
+            'cursos' : curso
+            
         }
 
         return render(request,'index/catalogoProfessor.html', ctx)
 
+# class Teste(View):
+#     def get(self, request):
+#         curso = Curso.objects.all()
+
+#         return render(request, 'index/teste.html', {'curso':curso})
 
 class CadastroAula(View):
     def post(self, request):
@@ -202,8 +233,7 @@ class CadastroAula(View):
         print(aula.titulo)
 class ComprarAula(View):
       def get(self, request, id_aula):
-          aula = Aula.objects.get(pk=id_aula) 
-          
+          aula = Aula.objects.get(pk=id_aula)
           return render(request,'index/compra.html',{'aula': aula})
 
 
@@ -224,6 +254,48 @@ class ComprarAula(View):
 
         return redirect('catalogo', id_professor=aula.professor.pk)
     
+class ComprarCurso(View):
+    def get(self, request, id_curso):
+        curso = Curso.objects.get(pk=id_curso)
+        return render(request, 'index/compracurso.html', {'curso':curso})
+
+
+    def post(self, request, id_curso, *args, **kwargs):
+        curso = Curso.objects.get(pk=id_curso)
+        novoAluno = Aluno()
+        novoAluno.nome = request.POST.get('nome')
+        novoAluno.email = request.POST.get('email')
+        # send_mail('ALGUEM SE INSCREVEU NUM CURSO ENVIAR BOLETO PARA O SEGUINTE EMAIL',novoAluno.email,settings.EMAIL_HOST_USER,
+        # ['prof.dayvisonananias@gmail.com','prof.carlosmoura@gmail.com','aland295@gmail.com'], fail_silently=False)
+        novoAluno.save()
+        curso.alunos.add(novoAluno)
+        
+
+        # aluno = Aluno()
+        # aluno.nome = request.POST.get('nome')
+        # aluno.email = request.POST.get('email')
+        
+
+        return redirect('catalogo', id_professor=curso.professor.pk)
+
+class ListaAlunos(View):
+    def get(self, request):
+        professor = Professor.objects.get(user=self.request.user)   
+        curso = Curso.objects.filter(professor = professor)
+
+        ctx = {
+            'cursos':curso,
+            'professor' : professor
+        }
+        return render(request,'index/listaAlunosCurso.html', ctx)
+
+class ListaAlunosCurso(View):
+    def get(self, request, id_curso):
+        # professor = Professor.objects.get(user=self.request.user)
+        turma = get_object_or_404(Curso, pk=id_curso)
+        aluno = turma.alunos.all()
+        return render (request, 'index/AlunosLista.html', {"alunos": aluno})
+       
 
 class AgendaProfessor(View):
     def get(self, request):

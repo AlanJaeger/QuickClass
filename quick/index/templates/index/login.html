@@ -13,7 +13,8 @@
   <link href="{% static 'css/GaiaIndex.css' %}" rel="stylesheet" />
   <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" />
   <link href="{% static 'css/gaia.css' %}" rel="stylesheet" />
- 
+  <link rel="stylesheet" type="text/css" href="{% static "css/login.css" %}">
+  
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- <link rel="stylesheet" type="text/css" href="{% static "css/estilo.css" %}"> -->
@@ -130,7 +131,7 @@
       <div class="form-container">
         <div class="col-sm-9 col-sm-offset-7 col-xs-10 col-xs-offset-1 text-center" style="margin-top:75px;">
           <div class="title-area">
-            <h2 style="font-size:2.8rem">Efetue login</h2>
+            <h2 style="font-size:1.6rem; margin-bottom:2rem;margin-left: -37px">Entre no Quick Class e aproveite</h2>
           </div>
 <!--           
           <label>
@@ -148,11 +149,12 @@
             <input type="password" name="password" value="" placeholder="&#x25CF;&#x25CF;&#x25CF;&#x25CF;" class="form-control form-control-plain">
           </div> -->
           
-          <form action="/login/" method="post">
+          <form action="/login/" method="post" class="formulario">
             {% csrf_token %}
             {{ form.as_p }}
-          <a href="{% url 'index' %}"><button type="submit" class="btn btn-danger btn-round btn-fill btn-wd-size" style="float: right; 
-            background-color: #fe1043;
+          </form>
+          
+          <a href="{% url 'index' %}"><button type="submit" class="btn btn-danger btn-round btn-fill btn-wd-size botao entrar" style="background-color: #fe1043;
             line-height: normal;
             margin-top: 18px;
             margin-right: 3%;
@@ -166,7 +168,8 @@
             -webkit-transition: .5s;
             transition: .5s;
             margin-top: 67px;
-            margin-bottom: 50px;">Entrar</button></a>
+            margin-bottom: 50px;">Entrar</button>
+          </a>
 
           <div class="footer" style="background-color: inherit">
         

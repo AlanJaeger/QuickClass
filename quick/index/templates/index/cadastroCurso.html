@@ -1,0 +1,115 @@
+{% extends 'index/painel.html' %}
+{% load staticfiles %}
+{% load user_tags %}
+
+
+
+{% if request.user|has_group:"Professor"%} 
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Quick Class</title>
+    <link rel="icon" type="image/icon" href="{% static "img/simboloQuick.png"%}">
+
+    <!--CSS do Bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!--CSS Quick Class-->
+    <link rel="stylesheet" type="text/css" href="{%static "css/FormProfessor.css"%}">
+
+    <!--Fonts CSS-->
+    <link href="{% static "https://fonts.googleapis.com/css?family=Yantramanav:700"%}" rel="stylesheet">
+</head>
+
+<body>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-fixed-top">
+        <div class="container">
+            <img class="img-fluid logo" src="{% static "img/logo-quick.png"%}">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home
+                        <span class="sr-only">(current)</span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--Navbar-->
+
+    <!--Card Form-->
+    {% block content %}
+    <div class="row">
+        <div class="col-md-7 col-md-offset-2">
+          <form method="POST" enctype="multipart/form-data" action="{% url 'cadastro_curso' %}">
+              {% csrf_token %}
+              <div class="field">
+                  <label class="labelnome">Nome do Curso</label>
+                  <div class="control">
+                      <div class="">
+                      {{form.nome}}
+                      </div>
+                  </div>
+              </div>
+              <div class="field">
+                <label class="labelnome">Título do Curso</label>
+                <div class="control">
+                  {{form.titulo}}
+                </div>
+              </div>
+              <div class="field">
+                  <label class="labelnome">Conteúdo do Curso</label>
+                  <div class="control">
+                      {{form.conteudo}}
+                  </div>
+              </div>
+              <div class="field">
+                  <label class="labelnome">Informações Adicionais</label>
+                  <div class="control">
+                      {{form.informacoes}}
+                </div>
+              </div>
+      
+              <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-12">
+                            <label>Imagem</label>
+                            <div class="file is-info has-name">
+                              <label class="file-label">
+                              {{form.imagem}}
+                              </label>
+                            </div>
+                          </div>
+                      </div>
+              </div>
+      
+              <div class="field is-grouped" style="
+              margin-top: 10px;">
+                  <button type="submit" class="btn btn-primary">
+                    Salvar
+                  </button>
+              </div>
+          </form>
+          </div>
+        </div>
+        {% endblock %}
+    {% endif %}

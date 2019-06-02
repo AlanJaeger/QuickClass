@@ -1,0 +1,123 @@
+
+{% load staticfiles %}
+
+{% block content %}
+    <form  action="{% url 'venda_curso' id_curso=curso.pk %} " name="dados" method="POST" class="form">
+            {% csrf_token %}
+                          <style>
+                            .btn-outline-danger {
+                    color: #dc3545;
+                    background-color: transparent;
+                    background-image: none;
+                    border-color: #dc3545;
+                
+                }
+                .signin-button:hover{
+                    background-color: #fe1043;
+                    color: white;
+                }
+                          </style>
+                      
+      
+                          {% load staticfiles %}
+                          <!DOCTYPE html>
+                          <html lang="pt-br">
+                          
+                          <head>
+                              <meta name="viewport" content="width=device-width, initial-scale=1">
+                              <title>Curso</title>
+                              <link rel="icon" type="image/icon" href="{% static 'img/LogoSimb.png' %}">
+                          
+                              <!--CSS Parallax-->
+                              <link href="{% static 'css/curso.css' %}" rel="stylesheet" />
+                          
+                              <!--CSS do Bootstrap-->
+                              <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+                              <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+                          
+                              <!--Fonts CSS-->
+                              <link href="https://fonts.googleapis.com/css?family=Yantramanav:700" rel="stylesheet">
+                          </head>
+                          
+                          <body>
+                          
+                              <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-fixed-top">
+                                  <div class="container">
+                                      <a href="/">
+                                          <img class="img-fluid logo" src="{% static 'img/logo-quick.png' %}">
+                                      </a>        
+                                      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                                                <span class="navbar-toggler-icon"></span>
+                                      </button>
+                                  </div>
+                              </nav>
+                          
+                              <div class="parallax">
+                                  <div class="container">
+                                      <div class="content">
+                                          <div class="title-header">
+                                              <h1>{{curso.titulo}}</h1>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          
+                              <div class="card-style">
+                                  <div class="row">
+                                      <div class="col-md-8">
+                                          <div class="overlay">
+                                              <img src="{% static 'img/servicos.jpg' %}" style="width: 100%">
+                                          </div>
+                                      </div>
+                                      
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-8">
+                                          <div class="content-blog">
+                                              <h3 style=" margin-top: 20px; font-size: 35px; color: white">Conteúdo</h3>
+                          
+                                              <ul class="estilo_lista">
+                                                  <li>
+                                                     {{curso.conteudo}}
+                                                  </li>
+                                              </ul>
+                                          </div>
+                                      </div>
+                          
+                                      <div class="col-md-4 text-left estilo_lista_espaco">
+                          
+                                          <h2 class="social-title" style="font-size: 25px;">Informações Adicionais:</h2>
+                                          <span style="font-size: 14px">{{curso.informacoes}}</span>
+                          
+                                         
+                                          <div class="row" style="margin-top:20px;">
+                                            <div class="col-md-6">
+                                              <label for="inputEmail4">Nome</label>
+                                              <input type="text" class="form-control" id="inputName"  value="" name="nome" placeholder="Seu Nome">
+                                            </div>
+                                            <div class="col-md-6">
+                                              <label for="inputPassword4">Email</label>
+                                              <input type="email" class="form-control" id="inputEmail" value=""  name="email" placeholder="Seu Email">
+                                            </div>
+                                          </div>
+                                          <div class="col-md-12" style="float:right; margin-top:20px;">
+                                            <!-- <label for="inputAddress">Assunto</label> -->
+                                            <!-- <input type="text" class="form-control" id="inputAssunto" name ="assunto" placeholder="O assunto da aula"> -->
+                                            <input type="hidden"  value="{{curso.pk}}" name="id_aula"/>   
+                                            <button type="submit" method="POST" class="btn btn-block btn-outline-danger signin-button">Inscreva-se no Curso</button>                                        
+                                          </div>
+                                          </div>
+                          </body>
+                          
+                          <!--JS Bootstrap-->
+                          <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+                          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+                          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+                          
+                          <!--JS Parallax-->
+                          <script type="text/javascript" src="{% static 'js/curso.js' %}"></script>
+                          
+                          </html>
+
+           
+            {%endblock%}
