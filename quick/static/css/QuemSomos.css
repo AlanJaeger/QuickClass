@@ -1,0 +1,57 @@
+.logo {
+    width: 150px;
+    height: 70px;
+}
+
+.navbar-fixed-top.scrolled {
+    background-color: rgba(63, 62, 62, 0.678) !important;
+    transition: background-color 200ms linear;
+}
+
+.nav-item.active {
+    border-bottom-color: #fff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial;
+    font-size: 17px;
+}
+
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.overlay {
+    position: fixed;
+    bottom: 0;
+    background: rgba(185, 30, 58, 0.69);
+    height: 100%;
+    width: 100%;
+}
+
+.text-title {
+    color: #f1f1f1;
+    padding: 150px;
+    padding-left: 145px;
+    font-size: 50px;
+    font-family: 'Arvo', serif;
+    transition: transform 1s;
+}
+
+.text-title:hover {
+    transform: translate(20px, 0px);
+}
+
+.description-about {
+    padding: 200px;
+    padding-left: 50px;
+}
