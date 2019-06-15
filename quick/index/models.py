@@ -19,6 +19,9 @@ class Aluno(models.Model):
     nome = models.CharField(max_length = 80, blank=True, null=True)
     email = models.CharField(max_length = 80, blank=True, null=True)
 
+    class Meta:
+        db_table = 'aluno'
+
 class Curso(models.Model):
     alunos = models.ManyToManyField('Aluno', blank = True)
     titulo = models.CharField(max_length = 80, blank=True, null=True)

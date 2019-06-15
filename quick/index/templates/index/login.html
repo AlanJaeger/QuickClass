@@ -152,8 +152,6 @@
           <form action="/login/" method="post" class="formulario">
             {% csrf_token %}
             {{ form.as_p }}
-          </form>
-          
           <a href="{% url 'index' %}"><button type="submit" class="btn btn-danger btn-round btn-fill btn-wd-size botao entrar" style="background-color: #fe1043;
             line-height: normal;
             margin-top: 18px;
