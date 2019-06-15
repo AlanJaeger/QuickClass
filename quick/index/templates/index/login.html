@@ -149,10 +149,11 @@
             <input type="password" name="password" value="" placeholder="&#x25CF;&#x25CF;&#x25CF;&#x25CF;" class="form-control form-control-plain">
           </div> -->
           
-          <form action="/login/" method="post" class="formulario">
+          <form action="/login/" method="post">
             {% csrf_token %}
             {{ form.as_p }}
-          <a href="{% url 'index' %}"><button type="submit" class="btn btn-danger btn-round btn-fill btn-wd-size botao entrar" style="background-color: #fe1043;
+          <a href="{% url 'index' %}"><button type="submit" class="btn btn-danger btn-round btn-fill btn-wd-size" style="float: right; 
+            background-color: #fe1043;
             line-height: normal;
             margin-top: 18px;
             margin-right: 3%;
@@ -166,8 +167,7 @@
             -webkit-transition: .5s;
             transition: .5s;
             margin-top: 67px;
-            margin-bottom: 50px;">Entrar</button>
-          </a>
+            margin-bottom: 50px;">Entrar</button></a>
 
           <div class="footer" style="background-color: inherit">
         
