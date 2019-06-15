@@ -15,6 +15,8 @@
 
     <!--CSS Quick Class-->
     <link rel="stylesheet" type="text/css"  href="{% static 'css/QuemSomos.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    
 
     <!--Fonts CSS-->
     <link href="https://fonts.googleapis.com/css?family=Yantramanav:700" rel="stylesheet">
@@ -22,6 +24,46 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 </head>
 
+<style>
+    .navbar{
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left :0;
+  padding: 2rem;
+  text-align: center;
+  color: black;
+  font-family: sans-serif;
+  background-color: rgba(128, 128, 128, 0);
+  transition: 0.3s;
+}
+
+.scrolled{
+  background-color: rgba(63, 62, 62, 0.678);
+  transition: 0.3s;
+}
+
+.efeito:hover{
+    transform: translate(20px, 0px);
+}
+
+</style>
+
+<script>
+    $(function() {
+    var header = $(".navbar");
+  
+    $(window).scroll(function() {    
+        var scroll = $(window).scrollTop();
+        if (scroll >= 50) {
+            header.addClass("scrolled");
+        } else {
+            header.removeClass("scrolled");
+        }
+    });
+  
+});
+</script>
 <body class="fadeIn">
 
     <video autoplay muted loop id="myVideo">
@@ -29,43 +71,43 @@
     </video>
 
     <div class="overlay">
-            <div class="text-title" style="position:fixed;">Quem Somos</div>
+            
     </div>
     
-
-    <section class="bg-primary text-white mb-0">
         <div class="container description-about">
-            <hr class="mb-5">
             <div class="row">
+                <div class="col-md-12">
+                        <h1 class="efeito" style="font-size:70px; color:white; margin-top: -66px;
+                        margin-bottom: 45px;    transition: transform 1s;">
+                                Quem Somos
+                        </h1>
+                </div>
+            </div>
+            <div class="row">
+                
                 <div class="col-lg-6 ml-auto">
-                    <p class="lead">A Quick Class é uma plataforma de aprendizagem que nasceu para ajudar você a atingir os seus objetivos de aprendizagem. Temos a melhor e mais experiente equipe de professores das mais diferentes áreas, preparados para te ajudar com os seus desafios escolares, bem aí, dentro da sua casa.
+                    
+                    <p class="lead" style="color:white;text-align: justify; font-size:20px">A Quick Class é uma plataforma de aprendizagem que nasceu para ajudar você a atingir os seus objetivos de aprendizagem. Temos a  mais experiente equipe de professores das mais diferentes áreas, preparados para te ajudar com os seus desafios escolares, bem aí, dentro da sua casa.
                         Nosso propósito é levar um ensino de qualidade, elaborado por professores competentes e experientes, para o maior número possível de pessoas. Somos convictos que a educação muda as pessoas e as pessoas mudam o mundo.</p>
                 </div>
                 <div class="col-lg-6 mr-auto">
-                    <p class="lead">Para atingir nosso propósito, conectamos uma rede de professores apaixonados por educação, dispostos a entregar, na sua casa, os conhecimentos que irão te ajudar a superar os desafios que surgem na sua rotina de estudos.
+                    <p class="lead" style="color:white;text-align: justify;">Para atingirmos nosso propósito, conectamos uma rede de professores apaixonados por educação, dispostos a entregar, na sua casa, os conhecimentos que irão te ajudar a superar os desafios que surgem na sua rotina de estudos.
                         A tecnologia já faz parte da nossa vida, por isso estamos fazendo uso da mesma para encurtar a distância entre você e o conhecimento estruturado por professores experts naquilo que você deseja aprender.</p>
                 </div>
              
             </div>
         </div>
-    </section>
+   
 
     <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-fixed-top">
+    <nav class="navbar">
         <div class="container">
             <img class="img-fluid logo" src="{% static "img/logo-quick.png" %}">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/">Home
-                        <span class="sr-only">(current)</span>
-                      </a>
-                    
-                </ul>
-            </div>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a style="color:white;" href="/" style="text-decoration: none;">Página Inicial
+            </a>
         </div>
     </nav>
     <!--Navbar-->

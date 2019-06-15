@@ -51,10 +51,5 @@ urlpatterns = [
     url(r'cadastro_curso/', CadastroCurso.as_view(), name='cadastro_curso'),
     url(r'cursos_turma/', ListaAlunos.as_view(), name='cursos_turma'),
     url(r'alunos_lista/(?P<id_curso>\d+)', ListaAlunosCurso.as_view(), name='alunos_turma'),
-   
-   
-    # url(r'notify/', email.as_view(), name = 'email'),
-
-
-
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
